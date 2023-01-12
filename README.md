@@ -1,11 +1,11 @@
 <h1 align="center">
-  <a href="https://enzosylvestrin.github.io/Akame-Wiki/">PokeStack</a>
+ PokeStack
 </h1>
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/EnzoSylvestrin/PokeStack?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/EnzoSylvestrin/PokeStack?style=for-the-badge)
 
-🚧 O projeto ainda está em construção! 🚧
+<h2>🚧 O projeto ainda está em construção! 🚧</h2>
 
 ## 📚 Introdução 
 
