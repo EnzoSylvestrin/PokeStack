@@ -3,13 +3,14 @@ import { useEffect } from 'react';
 import Head from 'next/head';
 
 import Api from '../utils/Api';
+import Login from '../components/Login';
 
 export default function Home() {
 
   useEffect(() => {
-    Api.get('/Connection').then((response : any) => {
+    Api.get('/Connection').then((response: any) => {
       console.log(response);
-    }).catch((Error : any) => {
+    }).catch((Error: any) => {
       console.log(Error);
     })
   }, []);
@@ -22,9 +23,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
-        <h1>Hello world</h1>
-      </div>
+      <Login />
     </>
   )
 }

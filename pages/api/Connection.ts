@@ -1,15 +1,16 @@
 import { createHandler }from './connection/CreateHandler';
 import { NextRequest } from 'next/server';
-import Model from './models/UserModel';
+import Model from './schemas/UserModel';
+import { User } from './models/Types';
 
-const handler = createHandler(); 
+const connection = createHandler(); 
 
-handler.get(async (req : NextRequest, res : any) => {
+connection.get(async (req : NextRequest, res : any) => {
   
-  const Users = await Model.find({}).exec();
+  const Users : User[] = await Model.find({}).exec();
 
   res.status(200).json(Users);
 
 });
 
-export default handler;
+export default connection;
