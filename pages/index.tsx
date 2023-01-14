@@ -1,6 +1,19 @@
-import Head from 'next/head'
+import { useEffect } from 'react';
+
+import Head from 'next/head';
+
+import Api from '../utils/Api';
 
 export default function Home() {
+
+  useEffect(() => {
+    Api.get('/Connection').then((response : any) => {
+      console.log(response);
+    }).catch((Error : any) => {
+      console.log(Error);
+    })
+  }, []);
+
   return (
     <>
       <Head>
@@ -9,7 +22,9 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      
+      <div>
+        <h1>Hello world</h1>
+      </div>
     </>
   )
 }
