@@ -1,29 +1,33 @@
-import { Password, User } from "phosphor-react";
-import Button from "../stories/Button/Button";
-import Heading from "../stories/Heading/Heading";
-import { Input } from "../stories/Input/Input";
-import Text from "../stories/Text/Text";
-import { LinkStyled, LoginContainer, LoginWrapper } from "../styles/LoginStyled";
+import { Envelope, Lock } from "phosphor-react";
+
+import Button from "./Button/Button";
+import { Input } from "./Input/Input";
+import Text from "./Text/Text";
+import Heading from "./Heading/Heading";
+import Form from "./Form/Form";
+
+import { LoginContainer } from "../styles/LoginStyled";
+import { LinkStyled } from "../styles/Commom";
 
 const Login = () => {
     return (
         <LoginContainer>
-            <LoginWrapper action="" method="POST">
+            <Form action="" method="POST">
                 <Heading style={{ marginBottom: '8px', textAlign: "center" }}>
                     <h1>PokeStack</h1>
                 </Heading>
                 <Text size="md" style={{ color: "#727070", margin: "4px 0", textAlign: "center" }}>
-                    <p>Faça o login e começe a usar!</p>
+                    <p>Faça o login e entre no site!</p>
                 </Text>
-                <label htmlFor="user">
+                <label htmlFor="email">
                     <Text size="md" style={{ margin: '16px 0' }}>
-                        <p>Usuário:</p>
+                        <p>Email:</p>
                     </Text>
                     <Input.Root>
                         <Input.Icon>
-                            <User />
+                            <Envelope />
                         </Input.Icon>
-                        <Input.Input type={'text'} id="user" maxLength={40} name="txtUser" placeholder="user..." />
+                        <Input.Input type={'email'} id="email" maxLength={40} name="txtUser" placeholder="email..." />
                     </Input.Root>
                 </label>
                 <label htmlFor="password">
@@ -32,20 +36,20 @@ const Login = () => {
                     </Text>
                     <Input.Root>
                         <Input.Icon>
-                            <Password />
+                            <Lock />
                         </Input.Icon>
-                        <Input.Input type={'password'} id="password" maxLength={40} name="txtPassword" placeholder="password..." />
+                        <Input.Input type={'password'} id="password" maxLength={40} name="txtPassword" placeholder="senha..." />
                     </Input.Root>
                 </label>
                 <Button
-                    style={{ marginTop: '16px', width: '80px', alignSelf: "center", boxShadow: "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;" }}
+                    style={{ marginTop: '16px', alignSelf: "center", boxShadow: "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px" }}
                 >
                     Login
                 </Button>
                 <Text size="sm" style={{ marginTop: '20px' }}>
-                    <LinkStyled href="#">Não tem uma conta ainda? crie uma agora! </LinkStyled>
+                    <LinkStyled href="/SignUp">Não tem uma conta ainda? crie uma agora! </LinkStyled>
                 </Text>
-            </LoginWrapper>
+            </Form>
         </LoginContainer>
     );
 }
