@@ -1,15 +1,17 @@
 import { ReactNode } from "react";
 import { HeadingComponent } from "./HeadingStyled";
 
-export type HeadingProps = {
+import { SlotProps } from '@radix-ui/react-slot';
+
+export type HeadingProps = SlotProps & {
     size?: 'sm' | 'md' | 'lg';
     children: ReactNode;
 };
 
-function Heading(props: HeadingProps) {
+function Heading({ size, children, ...rest }: HeadingProps) {
     return (
-        <HeadingComponent size={props.size}>
-            {props.children}
+        <HeadingComponent size={size} {...rest}>
+            {children}
         </HeadingComponent>
     );
 }

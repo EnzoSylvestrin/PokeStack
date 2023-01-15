@@ -5,7 +5,7 @@ export const ButtonStyled = styled.button<ButtonProps>`
     background-color: var(--red);
     border-radius: 12px;
     font-size: 18px;
-    padding: 12px 16px;
+    padding: 10px 10px;
     color: var(--textColor);
     transition: all 0.4s ease;
     border: 1px solid transparent;
@@ -16,6 +16,6 @@ export const ButtonStyled = styled.button<ButtonProps>`
     }
 
     :focus {
-        border: 1px solid white;
+        transform: scale(1);
     }
 `

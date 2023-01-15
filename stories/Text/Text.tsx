@@ -1,15 +1,17 @@
 import { ReactNode } from "react";
 import { TextStyled } from "./TextStyled";
 
-export type TextProps = {
+import { SlotProps } from '@radix-ui/react-slot';
+
+export type TextProps = SlotProps & {
     size?: 'sm' | 'md' | 'lg';
     children: ReactNode;
 }
 
-function Text(props: TextProps) {
+function Text({ size = 'md', children, ...rest }: TextProps) {
     return (
-        <TextStyled size={props.size}>
-            {props.children}
+        <TextStyled size={size} {...rest}>
+            {children}
         </TextStyled>
     );
 }

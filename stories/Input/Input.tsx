@@ -1,30 +1,32 @@
-import { InputHTMLAttributes, ReactNode } from "react";
+import { InputHTMLAttributes, ReactNode, HTMLAttributes } from "react";
 import { ContainerInput, IconSlot, InputComponent } from "./InputStyled";
 
-export type InputRootProps = {
+import { SlotProps } from '@radix-ui/react-slot';
+
+export type InputRootProps = HTMLAttributes<HTMLDivElement> & {
     children: ReactNode;
 };
 
-export type InputIconProps = {
+export type InputIconProps = SlotProps & {
     children: ReactNode;
 }
 
 export type InputTextProps = InputHTMLAttributes<HTMLInputElement>;
 
-const InputRoot = (props: InputRootProps) => {
+const InputRoot = ({ children, ...rest }: InputRootProps) => {
     return (
-        <ContainerInput>
-            {props.children}
+        <ContainerInput {...rest}>
+            {children}
         </ContainerInput>
     );
 }
 
 InputRoot.displayName = 'Input.Root';
 
-const InputIcon = (props: InputIconProps) => {
+const InputIcon = ({ children, ...rest }: InputIconProps) => {
     return (
-        <IconSlot>
-            {props.children}
+        <IconSlot {...rest}>
+            {children}
         </IconSlot>
     );
 }

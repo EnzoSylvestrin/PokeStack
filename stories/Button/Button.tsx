@@ -1,14 +1,16 @@
 import { ReactNode } from "react";
 import { ButtonStyled } from "./ButtonStyled";
 
-export type ButtonProps = {
+import { SlotProps } from '@radix-ui/react-slot';
+
+export type ButtonProps = SlotProps & {
     children: ReactNode;
 }
 
-function Button(props: ButtonProps) {
+function Button({ children, ...rest }: ButtonProps) {
     return (
-        <ButtonStyled>
-            {props.children}
+        <ButtonStyled {...rest}>
+            {children}
         </ButtonStyled>
     );
 }
