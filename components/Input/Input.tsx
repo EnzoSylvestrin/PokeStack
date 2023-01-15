@@ -2,6 +2,7 @@ import { InputHTMLAttributes, ReactNode, HTMLAttributes } from "react";
 import { ContainerInput, IconSlot, InputComponent } from "./InputStyled";
 
 import { SlotProps } from '@radix-ui/react-slot';
+import { UseFormRegister } from "react-hook-form/dist/types";
 
 export type InputRootProps = HTMLAttributes<HTMLDivElement> & {
     children: ReactNode;
@@ -11,7 +12,11 @@ export type InputIconProps = SlotProps & {
     children: ReactNode;
 }
 
-export type InputTextProps = InputHTMLAttributes<HTMLInputElement>;
+export type InputTextProps = InputHTMLAttributes<HTMLInputElement> & {
+    label: string;
+    register: UseFormRegister<any>;
+    required?: boolean;
+};
 
 const InputRoot = ({ children, ...rest }: InputRootProps) => {
     return (
@@ -31,11 +36,12 @@ const InputIcon = ({ children, ...rest }: InputIconProps) => {
     );
 }
 
-const InputText = (props: InputTextProps) => {
+const InputText = ({ register, label, required = false, ...rest }: InputTextProps) => {
     return (
         <InputComponent
             type="text"
-            {...props}
+            {...register(label, { required })}
+            {...rest}
         />
     );
 }

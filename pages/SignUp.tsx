@@ -1,6 +1,10 @@
 import { Check, Envelope, Lock, User } from "phosphor-react";
 
 import { useForm } from "react-hook-form";
+import { SubmitHandler } from "react-hook-form/dist/types";
+
+import { toast } from "react-hot-toast";
+
 
 import Button from "../components/Button/Button";
 import { Input } from "../components/Input/Input";
@@ -11,9 +15,7 @@ import HeadComponent from "../components/HeadCoponent";
 
 import { LoginContainer } from "../styles/LoginStyled";
 import { LinkStyled } from "../styles/Commom";
-import { toast } from "react-hot-toast";
-import { SubmitHandler } from "react-hook-form/dist/types";
-import { useEffect } from "react";
+
 
 type SubmitInputs = {
     user: string;
@@ -27,18 +29,15 @@ const SignUp = () => {
 
     const DoOnSubmit: SubmitHandler<SubmitInputs> = (data: SubmitInputs) => {
         console.log(data);
+        toast.success('Form validado', {
+            position: 'bottom-right'
+        })
     }
-
-    useEffect(() => {
-        register('user', { required: true })
-        register('email', { required: true })
-        register('password', { required: true })
-        register('confirmPassword', { required: true })
-    }, [])
 
     return (
         <>
             <HeadComponent />
+
             <LoginContainer>
                 <Form onSubmit={handleSubmit(DoOnSubmit)}>
                     <Heading size="lg" style={{ marginBottom: '8px', textAlign: "center" }}>
@@ -55,7 +54,7 @@ const SignUp = () => {
                             <Input.Icon>
                                 <User />
                             </Input.Icon>
-                            <Input.Input type={'text'} id="user" maxLength={40} placeholder="usuário..." name="user" />
+                            <Input.Input type={'text'} id="user" maxLength={40} placeholder="usuário..." register={register} label="user" required />
                         </Input.Root>
                     </label>
                     <label htmlFor="email">
@@ -66,7 +65,7 @@ const SignUp = () => {
                             <Input.Icon>
                                 <Envelope />
                             </Input.Icon>
-                            <Input.Input type={'email'} id="email" maxLength={40} placeholder="email..." name="email" />
+                            <Input.Input type={'email'} id="email" maxLength={40} placeholder="email..." register={register} label="email" required />
                         </Input.Root>
                     </label>
                     <label htmlFor="password">
@@ -77,7 +76,7 @@ const SignUp = () => {
                             <Input.Icon>
                                 <Lock />
                             </Input.Icon>
-                            <Input.Input type={'password'} id="password" maxLength={40} placeholder="senha..." name="password" />
+                            <Input.Input type={'password'} id="password" maxLength={40} placeholder="senha..." register={register} label="password" required />
                         </Input.Root>
                     </label>
                     <label htmlFor="passwordConfirm">
@@ -88,10 +87,11 @@ const SignUp = () => {
                             <Input.Icon>
                                 <Lock />
                             </Input.Icon>
-                            <Input.Input type={'password'} id="passwordConfirm" maxLength={40} placeholder="confirme a senha..." name="confirmPassword" />
+                            <Input.Input type={'password'} id="passwordConfirm" maxLength={40} placeholder="confirme a senha..." register={register} label="confirmPassword" required />
                         </Input.Root>
                     </label>
                     <Button
+                        type="submit"
                         style={{ marginTop: '20px', alignSelf: "center", boxShadow: "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px" }}
                     >
                         Criar conta

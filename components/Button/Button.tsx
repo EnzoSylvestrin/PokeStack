@@ -1,9 +1,9 @@
-import { ReactNode } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 import { ButtonStyled } from "./ButtonStyled";
 
 import { SlotProps } from '@radix-ui/react-slot';
 
-export type ButtonProps = SlotProps & {
+export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
     children: ReactNode;
 }
 
