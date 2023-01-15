@@ -26,5 +26,5 @@ export const TextStyled = styled(({ ...rest }: SlotProps) => <Slot {...rest} />)
 `;
 
 export const CustomText = styled.span`   
-    color: red;
+    color: var(--red);
 `

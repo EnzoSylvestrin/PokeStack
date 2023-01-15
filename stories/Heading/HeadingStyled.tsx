@@ -4,7 +4,7 @@ import { Slot } from '@radix-ui/react-slot';
 import { HeadingProps } from "./Heading";
 
 export const HeadingComponent = styled(Slot) <HeadingProps>`
-    color: #f5f1f1;
+    color: var(--textColor);
     font-weight: 700;
     ${props => {
         switch (props.size) {
@@ -27,5 +27,5 @@ export const HeadingComponent = styled(Slot) <HeadingProps>`
 `;
 
 export const CustomHeading = styled.h1`
-    color: red;
+    color: var(--red);
 `;
