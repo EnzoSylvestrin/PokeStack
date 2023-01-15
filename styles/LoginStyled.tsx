@@ -18,4 +18,13 @@ export const LoginWrapper = styled(motion.form)`
     justify-content: center;
     border-radius: 8px;
     color: white;
-`
+`;
+
+export const LinkStyled = styled.a`
+    text-decoration: underline;
+    transition: all 0.3s ease;
+
+    :hover {
+        color: var(--red);
+    }
+`;

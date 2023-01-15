@@ -18,7 +18,7 @@ export const ContainerInput = styled.div`
     }
 
     :focus-within {
-        border: 2px solid #41ead4;
+        border: 2px solid var(--Cyan);
     }
 `
 
@@ -38,5 +38,5 @@ export const InputComponent = styled.input`
 export const IconSlot = styled(Slot)`
     width: 24px;
     height: 24px;
-    color: #41ead4;
+    color: var(--Cyan);
 `

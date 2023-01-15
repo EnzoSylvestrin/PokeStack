@@ -9,6 +9,7 @@ export const ButtonStyled = styled.button<ButtonProps>`
     color: var(--textColor);
     transition: all 0.4s ease;
     border: 1px solid transparent;
+    cursor: pointer;
 
     :hover {
         background-color: #c01128;
