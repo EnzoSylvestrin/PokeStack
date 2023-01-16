@@ -1,10 +1,11 @@
-import { Check, Envelope, Lock, User } from "phosphor-react";
+import { useEffect, useState } from "react";
+
+import { Check, Envelope, Lock, User, X } from "phosphor-react";
 
 import { useForm } from "react-hook-form";
 import { SubmitHandler } from "react-hook-form/dist/types";
 
-import { toast } from "react-hot-toast";
-
+import { toast } from 'react-hot-toast';
 
 import Button from "../components/Button/Button";
 import { Input } from "../components/Input/Input";
@@ -16,6 +17,7 @@ import HeadComponent from "../components/HeadCoponent";
 import { LoginContainer } from "../styles/LoginStyled";
 import { LinkStyled } from "../styles/Commom";
 
+import Api from "../utils/Api";
 
 type SubmitInputs = {
     user: string;
@@ -25,14 +27,55 @@ type SubmitInputs = {
 }
 
 const SignUp = () => {
-    const { register, handleSubmit } = useForm<SubmitInputs>();
+    const { register, handleSubmit, watch } = useForm<SubmitInputs>();
+    const password = watch('password');
+    const confirmPassword = watch('confirmPassword');
+
+    const [statePassword, setStatePassword] = useState(<Lock />);
 
     const DoOnSubmit: SubmitHandler<SubmitInputs> = (data: SubmitInputs) => {
-        console.log(data);
-        toast.success('Form validado', {
-            position: 'bottom-right'
-        })
+        if (statePassword != <Check />) {
+            toast.promise(Api.post('/CreateUser', { body: JSON.stringify(data) }),
+                {
+                    error: 'Ocorreu um erro ao criar a conta!',
+                    success: 'Conta criada com sucesso!',
+                    loading: 'Criando conta!'
+                },
+                {
+                    position: 'bottom-center'
+                }
+            )
+        }
+        else {
+            toast.error('Senhas diferentes', {
+                position: 'top-center'
+            });
+        }
     }
+
+    const BlurAction = () => {
+        if (confirmPassword == "" || password == "") {
+            setStatePassword(<Lock />)
+        }
+        else if (password != confirmPassword) {
+            setStatePassword(<X />)
+        }
+        else {
+            setStatePassword(<Check />)
+        }
+    }
+
+    useEffect(() => {
+        if (confirmPassword == "" || password == "") {
+            setStatePassword(<Lock />)
+        }
+        else if (statePassword != <Lock /> && password == confirmPassword) {
+            setStatePassword(<Check />)
+        }
+        else if (statePassword != <Lock /> && password != confirmPassword) {
+            setStatePassword(<X />)
+        }
+    }, [confirmPassword, password]);
 
     return (
         <>
@@ -85,9 +128,9 @@ const SignUp = () => {
                         </Text>
                         <Input.Root>
                             <Input.Icon>
-                                <Lock />
+                                {statePassword}
                             </Input.Icon>
-                            <Input.Input type={'password'} id="passwordConfirm" maxLength={40} placeholder="confirme a senha..." register={register} label="confirmPassword" required />
+                            <Input.Input type={'password'} onBlur={BlurAction} id="passwordConfirm" maxLength={40} placeholder="confirme a senha..." register={register} label="confirmPassword" required />
                         </Input.Root>
                     </label>
                     <Button

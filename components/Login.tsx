@@ -14,6 +14,7 @@ import Form from "./Form/Form";
 import { LoginContainer } from "../styles/LoginStyled";
 import { LinkStyled } from "../styles/Commom";
 import Api from "../utils/Api";
+
 import { User } from "../pages/api/models/Types";
 
 type SubmitInputs = {
@@ -51,7 +52,7 @@ const Login = () => {
             }
         }
         toast.error('Usuário inválido, tente novamente!', {
-            position: 'bottom-right'
+            position: 'top-center'
         })
     }
 
