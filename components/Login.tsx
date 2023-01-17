@@ -65,7 +65,7 @@ const Login = () => {
                 <Text size="md" style={{ color: "#727070", margin: "4px 0", textAlign: "center" }}>
                     <p>Faça o login e entre no site!</p>
                 </Text>
-                <label htmlFor="email">
+                <label htmlFor="email" style={{ cursor: 'text' }}>
                     <Text size="md" style={{ margin: '16px 0' }}>
                         <p>Email:</p>
                     </Text>
@@ -76,7 +76,7 @@ const Login = () => {
                         <Input.Input type={'email'} id="email" maxLength={40} placeholder="email..." register={register} label="email" required />
                     </Input.Root>
                 </label>
-                <label htmlFor="password">
+                <label htmlFor="password" style={{ cursor: 'text' }}>
                     <Text size="md" style={{ margin: '16px 0' }}>
                         <p>Senha:</p>
                     </Text>

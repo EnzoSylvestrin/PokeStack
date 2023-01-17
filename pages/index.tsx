@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import Api from '../utils/Api';
 import Login from '../components/Login';
 import HeadComponent from '../components/HeadCoponent';
+import { ThemeProvider } from 'styled-components';
+import { theme } from '../styles/Theme';
 
 export default function Home() {
 
@@ -15,9 +17,9 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <HeadComponent />
       <Login />
-    </>
+    </ThemeProvider>
   )
 }

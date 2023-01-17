@@ -38,8 +38,11 @@ const SignUp = () => {
 
     const [valid, setValid] = useState(false);
 
+    const [loading, setLoading] = useState(false);
+
     const DoOnSubmit: SubmitHandler<SubmitInputs> = async (data: SubmitInputs) => {
-        if (valid) {
+        if (valid || loading) {
+            setLoading(true);
             if (await VerifyEmail(data)) {
                 toast.promise(DoPost(data),
                     {
@@ -51,11 +54,13 @@ const SignUp = () => {
                         position: 'bottom-center'
                     }
                 )
+                setLoading(false);
             }
             else {
                 toast.error('Já existe um usuário com este email!', {
                     position: 'top-center'
                 });
+                setLoading(false);
             }
         }
         else {
@@ -120,7 +125,7 @@ const SignUp = () => {
                     <Text size="md" style={{ color: "#727070", margin: "4px 0", textAlign: "center" }}>
                         <p>Crie uma conta e começe a usar!</p>
                     </Text>
-                    <label htmlFor="user">
+                    <label htmlFor="user" style={{ cursor: 'text' }}>
                         <Text size="md" style={{ margin: '16px 0' }}>
                             <p>Usuário:</p>
                         </Text>
@@ -131,7 +136,7 @@ const SignUp = () => {
                             <Input.Input type={'text'} id="user" maxLength={40} placeholder="usuário..." register={register} label="user" required />
                         </Input.Root>
                     </label>
-                    <label htmlFor="email">
+                    <label htmlFor="email" style={{ cursor: 'text' }}>
                         <Text size="md" style={{ margin: '16px 0' }}>
                             <p>Email:</p>
                         </Text>
@@ -142,7 +147,7 @@ const SignUp = () => {
                             <Input.Input type={'email'} id="email" maxLength={40} placeholder="email..." register={register} label="email" required />
                         </Input.Root>
                     </label>
-                    <label htmlFor="password">
+                    <label htmlFor="password" style={{ cursor: 'text' }}>
                         <Text size="md" style={{ margin: '16px 0' }}>
                             <p>Senha:</p>
                         </Text>
@@ -153,7 +158,7 @@ const SignUp = () => {
                             <Input.Input type={'password'} id="password" maxLength={40} placeholder="senha..." register={register} label="password" required />
                         </Input.Root>
                     </label>
-                    <label htmlFor="passwordConfirm">
+                    <label htmlFor="passwordConfirm" style={{ cursor: 'text' }}>
                         <Text size="md" style={{ margin: '16px 0' }}>
                             <p>Confirme a senha:</p>
                         </Text>
@@ -168,7 +173,7 @@ const SignUp = () => {
                         type="submit"
                         style={{ marginTop: '20px', alignSelf: "center", boxShadow: "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px" }}
                     >
-                        Criar conta
+                        {loading ? 'Carregando...' : 'Criar conta'}
                     </Button>
                     <Text size="sm" style={{ marginTop: '20px', textAlign: 'center' }}>
                         <LinkStyled href="/">Ja tem uma conta? faça login!</LinkStyled>
