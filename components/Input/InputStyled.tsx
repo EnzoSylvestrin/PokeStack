@@ -9,7 +9,7 @@ export const ContainerInput = styled.div`
     display: flex;
     align-items: center;
     background-color: #222121;
-    color: ${props => props.theme.dark.textColor};
+    color: ${props => props.theme.colors.dark.textColor};
     border: 2px solid transparent;
     border-radius: 4px;
 
@@ -18,7 +18,7 @@ export const ContainerInput = styled.div`
     }
 
     :focus-within {
-        border: 2px solid ${props => props.theme.dark.Cyan};
+        border: 2px solid ${props => props.theme.colors.main};
     }
 `
 
@@ -27,9 +27,9 @@ export const InputComponent = styled.input`
     outline: none;
     border: none;
     flex: 1 1 0%;
-    color: ${props => props.theme.dark.textColor};
+    color: ${props => props.theme.colors.dark.textColor};
     font-size: 14px;
-    caret-color: ${props => props.theme.dark.Cyan};
+    caret-color: ${props => props.theme.colors.main};
 
     ::placeholder {
         color: #7a797a;
@@ -39,5 +39,5 @@ export const InputComponent = styled.input`
 export const IconSlot = styled(Slot)`
     width: 24px;
     height: 24px;
-    color: ${props => props.theme.dark.Cyan};
+    color: ${props => props.theme.colors.main};
 `

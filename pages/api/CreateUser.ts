@@ -1,7 +1,7 @@
 import { createHandler }from './connection/CreateHandler';
 import Model from './schemas/UserModel';
 
-const CreateUsers = createHandler(); 
+const CreateUsers = createHandler();
 
 CreateUsers.post(async (req : any, res : any) => {
 

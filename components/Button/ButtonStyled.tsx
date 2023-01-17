@@ -2,11 +2,11 @@ import styled from "styled-components";
 import { ButtonProps } from "./Button";
 
 export const ButtonStyled = styled.button<ButtonProps>`
-    background-color: ${props => props.theme.dark.red};
+    background-color: ${props => props.theme.colors.secondary};
     border-radius: 12px;
     font-size: 18px;
     padding: 10px 10px;
-    color: ${props => props.theme.dark.textColor};
+    color: ${props => props.theme.colors.dark.textColor};
     transition: all 0.4s ease;
     border: 1px solid transparent;
     cursor: pointer;

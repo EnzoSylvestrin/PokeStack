@@ -26,19 +26,7 @@ const Login = () => {
     const { register, handleSubmit } = useForm<SubmitInputs>();
 
     const DoOnSubmit: SubmitHandler<SubmitInputs> = (data: SubmitInputs) => {
-        toast.promise(CreatePromise(data),
-            {
-                success: 'Pegou os dados!',
-                error: 'Ocorreu um erro ao processar os dados!',
-                loading: 'Buscando informações!'
-            },
-            {
-                position: "bottom-center",
-                style: {
-                    minWidth: '90px'
-                }
-            },
-        )
+        CreatePromise(data)
     }
 
     const CreatePromise = async (data: SubmitInputs) => {
@@ -46,13 +34,13 @@ const Login = () => {
         for (let user of Users.data) {
             if (user.email == data.email && user.password == data.password) {
                 toast.success('Usuário válido', {
-                    position: 'top-center'
+                    position: 'bottom-center'
                 });
                 return;
             }
         }
         toast.error('Usuário inválido, tente novamente!', {
-            position: 'top-center'
+            position: 'bottom-center'
         })
     }
 

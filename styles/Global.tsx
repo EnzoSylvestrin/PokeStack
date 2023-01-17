@@ -5,6 +5,6 @@ export const GlobalStyle = createGlobalStyle`
     body {
         max-width: 100vw;
         overflow-x: hidden;
-        background-color: ${props => props.theme.dark.bgColor};
+        background-color: ${props => props.theme.colors.dark.bgColor};
     }
 `;

@@ -5,6 +5,6 @@ export const LinkStyled = styled.a`
     transition: all 0.3s ease;
 
     :hover {
-        color: ${props => props.theme.dark.red};
+        color: ${props => props.theme.colors.secondary};
     }
 `;
