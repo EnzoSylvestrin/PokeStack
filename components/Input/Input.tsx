@@ -13,8 +13,8 @@ export type InputIconProps = SlotProps & {
 }
 
 export type InputTextProps = InputHTMLAttributes<HTMLInputElement> & {
-    label: string;
-    register: UseFormRegister<any>;
+    label?: string;
+    register?: UseFormRegister<any>;
     required?: boolean;
 };
 
@@ -38,11 +38,17 @@ const InputIcon = ({ children, ...rest }: InputIconProps) => {
 
 const InputText = ({ register, label, required = false, ...rest }: InputTextProps) => {
     return (
-        <InputComponent
-            type="text"
-            {...register(label, { required })}
-            {...rest}
-        />
+        register != undefined && label != undefined ?
+            <InputComponent
+                type="text"
+                {...register(label, { required })}
+                {...rest}
+            />
+            :
+            <InputComponent
+                type="text"
+                {...rest}
+            />
     );
 }
 
