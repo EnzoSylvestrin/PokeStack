@@ -3,19 +3,19 @@ import Model from './schemas/UserModel';
 
 const CreateUsers = createHandler(); 
 
-CreateUsers.get(async (req : any, res : any) => {
+CreateUsers.post(async (req : any, res : any) => {
+
+    const data = req.body.body;
 
     await Model.create({
-        user: req.body.user,
-        email: req.body.email,
-        password: req.body.password
+        user: data.user,
+        email: data.email,
+        password: data.password
     }).then((response) => {
         res.status(200).send(response);
     }).catch((error) => {
         res.status(400).send(error);
     });
-
-    res.status(200).json('das');
 
 });
 

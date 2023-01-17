@@ -4,7 +4,7 @@ import { Slot, SlotProps } from '@radix-ui/react-slot';
 import { TextProps } from './Text';
 
 export const TextStyled = styled(({ ...rest }: SlotProps) => <Slot {...rest} />) <TextProps>`
-    color: #f5f1f1;
+    color: ${props => props.theme.dark.textColor};
     ${props => {
         switch (props.size) {
             case "sm":
@@ -26,5 +26,5 @@ export const TextStyled = styled(({ ...rest }: SlotProps) => <Slot {...rest} />)
 `;
 
 export const CustomText = styled.span`   
-    color: var(--red);
+    color: ${props => props.theme.dark.red};
 `

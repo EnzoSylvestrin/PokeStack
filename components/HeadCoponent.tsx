@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { Toaster } from "react-hot-toast";
+import { GlobalStyle } from "../styles/Global";
 
 function HeadComponent() {
     return (
@@ -11,8 +12,11 @@ function HeadComponent() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div><Toaster /></div>
+            <GlobalStyle />
         </>
     );
 }
+
+
 
 export default HeadComponent;

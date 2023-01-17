@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { Check, Envelope, Lock, User, X } from "phosphor-react";
+import { ThemeProvider } from "styled-components";
+import { Check, Envelope, Lock, User as UserIcon, X } from "phosphor-react";
 
 import { useForm } from "react-hook-form";
 import { SubmitHandler } from "react-hook-form/dist/types";
@@ -14,10 +15,12 @@ import Heading from "../components/Heading/Heading";
 import Form from "../components/Form/Form";
 import HeadComponent from "../components/HeadCoponent";
 
-import { LoginContainer } from "../styles/LoginStyled";
+import { theme } from "../styles/Theme";
 import { LinkStyled } from "../styles/Commom";
+import { LoginContainer } from "../styles/LoginStyled";
 
 import Api from "../utils/Api";
+import { User } from "./api/models/Types";
 
 type SubmitInputs = {
     user: string;
@@ -33,18 +36,27 @@ const SignUp = () => {
 
     const [statePassword, setStatePassword] = useState(<Lock />);
 
-    const DoOnSubmit: SubmitHandler<SubmitInputs> = (data: SubmitInputs) => {
-        if (statePassword != <Check />) {
-            toast.promise(Api.post('/CreateUser', { body: JSON.stringify(data) }),
-                {
-                    error: 'Ocorreu um erro ao criar a conta!',
-                    success: 'Conta criada com sucesso!',
-                    loading: 'Criando conta!'
-                },
-                {
-                    position: 'bottom-center'
-                }
-            )
+    const [valid, setValid] = useState(false);
+
+    const DoOnSubmit: SubmitHandler<SubmitInputs> = async (data: SubmitInputs) => {
+        if (valid) {
+            if (await VerifyEmail(data)) {
+                toast.promise(DoPost(data),
+                    {
+                        error: 'Ocorreu um erro ao criar a conta!',
+                        success: 'Conta criada com sucesso!',
+                        loading: 'Criando conta!'
+                    },
+                    {
+                        position: 'bottom-center'
+                    }
+                )
+            }
+            else {
+                toast.error('Já existe um usuário com este email!', {
+                    position: 'top-center'
+                });
+            }
         }
         else {
             toast.error('Senhas diferentes', {
@@ -53,15 +65,32 @@ const SignUp = () => {
         }
     }
 
+    const VerifyEmail = async (data: SubmitInputs) => {
+        const Users = await Api.get<Array<User>>('/GetAllUsers');
+        for (let user of Users.data) {
+            if (user.email == data.email) {
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+    const DoPost = async (data: SubmitInputs) => {
+        await Api.post('/CreateUser', { body: data });
+    }
+
     const BlurAction = () => {
         if (confirmPassword == "" || password == "") {
             setStatePassword(<Lock />)
         }
         else if (password != confirmPassword) {
             setStatePassword(<X />)
+            setValid(false);
         }
         else {
             setStatePassword(<Check />)
+            setValid(true);
         }
     }
 
@@ -71,14 +100,16 @@ const SignUp = () => {
         }
         else if (statePassword != <Lock /> && password == confirmPassword) {
             setStatePassword(<Check />)
+            setValid(true);
         }
         else if (statePassword != <Lock /> && password != confirmPassword) {
             setStatePassword(<X />)
+            setValid(false);
         }
     }, [confirmPassword, password]);
 
     return (
-        <>
+        <ThemeProvider theme={theme}>
             <HeadComponent />
 
             <LoginContainer>
@@ -95,7 +126,7 @@ const SignUp = () => {
                         </Text>
                         <Input.Root>
                             <Input.Icon>
-                                <User />
+                                <UserIcon />
                             </Input.Icon>
                             <Input.Input type={'text'} id="user" maxLength={40} placeholder="usuário..." register={register} label="user" required />
                         </Input.Root>
@@ -144,7 +175,7 @@ const SignUp = () => {
                     </Text>
                 </Form>
             </LoginContainer>
-        </>
+        </ThemeProvider>
     );
 }
 
