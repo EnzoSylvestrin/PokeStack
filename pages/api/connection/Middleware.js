@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
-import { urlConnection } from './ConnectionSecret';
 
-const MONGODB_CONN_STR = urlConnection; //process.env.MONGODB_CONN_STR
+const MONGODB_CONN_STR =  process.env.MONGODB_CONN_STR;
 
 const databaseMiddleware = async (req, res, next) => {
 
