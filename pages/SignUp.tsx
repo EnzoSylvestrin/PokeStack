@@ -57,7 +57,7 @@ const SignUp = () => {
                 setLoading(false);
             }
             else {
-                toast.error('Já existe um usuário com este email!', {
+                toast.error('Já existe uma conta com esse email!', {
                     position: 'top-center'
                 });
                 setLoading(false);

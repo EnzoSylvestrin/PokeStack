@@ -22,23 +22,20 @@ import Link from "next/link";
 
 import Router from "next/router";
 
-type SubmitInputs = {
-    email: string;
-    password: string;
-}
+type SubmitInputs = User;
 
 const LoginComponent = () => {
     const { register, handleSubmit } = useForm<SubmitInputs>();
     const [loading, setLoading] = useState(false);
 
     const DoOnSubmit: SubmitHandler<SubmitInputs> = (data: SubmitInputs) => {
-        CreatePromise(data)
+        CreatePromise(data);
     }
 
     const CreatePromise = async (data: SubmitInputs) => {
         if (!loading) {
             setLoading(true);
-            const Users = await Api.get<Array<User>>('/GetAllUsers');
+            const Users = await Api.get<User[]>('/GetAllUsers');
             for (let user of Users.data) {
                 if (user.email == data.email && user.password == data.password) {
                     Router.push('/');
@@ -47,7 +44,7 @@ const LoginComponent = () => {
             }
             toast.error('Usuário inválido, tente novamente!', {
                 position: 'bottom-center'
-            })
+            });
             setLoading(false);
         }
     }

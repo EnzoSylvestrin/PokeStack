@@ -8,6 +8,7 @@ export function createHandler(...middleware: any[]) {
             res.status(500).end("Ocorreu um erro");
         },
         onNoMatch: (req, res) => {
+            console.log(req.url);
             res.status(404).end("Arquivo não encontrado!");
         },
     }).use(databaseMiddleware, ...middleware);  
