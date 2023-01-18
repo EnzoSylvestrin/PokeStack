@@ -1,5 +1,8 @@
 import '../styles/globals.css';
 
+import { ThemeProvider } from "styled-components";
+import { theme } from "../styles/Theme"; 
+
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
@@ -9,3 +12,6 @@ export const parameters = {
     },
   },
 }
+
+const themeDecorator = storyFn => <ThemeProvider theme={theme}>{storyFn()}</ThemeProvider>
+export const decorators = [themeDecorator];

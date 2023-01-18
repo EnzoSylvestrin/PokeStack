@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { Envelope, Lock } from "phosphor-react";
 
 import { SubmitHandler } from "react-hook-form/dist/types/form";
@@ -16,32 +18,39 @@ import { LinkStyled } from "../styles/Commom";
 import Api from "../utils/Api";
 
 import { User } from "../pages/api/models/Types";
+import Link from "next/link";
 
 type SubmitInputs = {
     email: string;
     password: string;
 }
 
-const Login = () => {
+const LoginComponent = () => {
     const { register, handleSubmit } = useForm<SubmitInputs>();
+    const [loading, setLoading] = useState(false);
 
     const DoOnSubmit: SubmitHandler<SubmitInputs> = (data: SubmitInputs) => {
         CreatePromise(data)
     }
 
     const CreatePromise = async (data: SubmitInputs) => {
-        const Users = await Api.get<Array<User>>('/GetAllUsers');
-        for (let user of Users.data) {
-            if (user.email == data.email && user.password == data.password) {
-                toast.success('Usuário válido', {
-                    position: 'bottom-center'
-                });
-                return;
+        if (!loading) {
+            setLoading(true);
+            const Users = await Api.get<Array<User>>('/GetAllUsers');
+            for (let user of Users.data) {
+                if (user.email == data.email && user.password == data.password) {
+                    toast.success('Usuário válido', {
+                        position: 'bottom-center'
+                    });
+                    setLoading(false);
+                    return;
+                }
             }
+            toast.error('Usuário inválido, tente novamente!', {
+                position: 'bottom-center'
+            })
+            setLoading(false);
         }
-        toast.error('Usuário inválido, tente novamente!', {
-            position: 'bottom-center'
-        })
     }
 
     return (
@@ -79,14 +88,16 @@ const Login = () => {
                     type="submit"
                     style={{ marginTop: '16px', alignSelf: "center", boxShadow: "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px" }}
                 >
-                    Login
+                    {loading ? 'Carregando...' : 'Login'}
                 </Button>
                 <Text size="sm" style={{ marginTop: '20px' }}>
-                    <LinkStyled href="/SignUp">Não tem uma conta ainda? crie uma agora! </LinkStyled>
+                    <Link href="/SignUp">
+                        <LinkStyled>Não tem uma conta ainda? crie uma agora! </LinkStyled>
+                    </Link>
                 </Text>
             </Form>
         </LoginContainer>
     );
 }
 
-export default Login;
+export default LoginComponent;

@@ -13,6 +13,8 @@ declare module 'styled-components' {
         }
         main: string;
         secondary: string;
+        lightDark: string;
+        headerColor: string;
     };
   }
 }

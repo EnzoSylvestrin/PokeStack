@@ -8,7 +8,7 @@ export const ContainerInput = styled.div`
     gap: 8px;
     display: flex;
     align-items: center;
-    background-color: #222121;
+    background-color: ${props => props.theme.colors.lightDark};;
     color: ${props => props.theme.colors.dark.textColor};
     border: 2px solid transparent;
     border-radius: 4px;
@@ -23,7 +23,7 @@ export const ContainerInput = styled.div`
 `
 
 export const InputComponent = styled.input`
-    background-color: #222121;
+    background-color: ${props => props.theme.colors.lightDark};
     outline: none;
     border: none;
     flex: 1 1 0%;

@@ -1,25 +1,15 @@
-import { useEffect } from 'react';
+import { ThemeProvider } from "styled-components";
+import HeadComponent from "../components/HeadCoponent";
+import Header from "../components/Header/Header";
+import { theme } from "../styles/Theme";
 
-import Api from '../utils/Api';
-import Login from '../components/Login';
-import HeadComponent from '../components/HeadCoponent';
-import { ThemeProvider } from 'styled-components';
-import { theme } from '../styles/Theme';
-
-export default function Home() {
-
-  useEffect(() => {
-    Api.get('/Connection').then((response: any) => {
-      console.log(response);
-    }).catch((Error: any) => {
-      console.log(Error);
-    })
-  }, []);
-
-  return (
-    <ThemeProvider theme={theme}>
-      <HeadComponent />
-      <Login />
-    </ThemeProvider>
-  )
+function Home() {
+    return (
+        <ThemeProvider theme={theme}>
+            <HeadComponent />
+            <Header />
+        </ThemeProvider>
+    );
 }
+
+export default Home;

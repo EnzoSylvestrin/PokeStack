@@ -21,6 +21,7 @@ import { LoginContainer } from "../styles/LoginStyled";
 
 import Api from "../utils/Api";
 import { User } from "./api/models/Types";
+import Link from "next/link";
 
 type SubmitInputs = {
     user: string;
@@ -37,11 +38,10 @@ const SignUp = () => {
     const [statePassword, setStatePassword] = useState(<Lock />);
 
     const [valid, setValid] = useState(false);
-
     const [loading, setLoading] = useState(false);
 
     const DoOnSubmit: SubmitHandler<SubmitInputs> = async (data: SubmitInputs) => {
-        if (valid || loading) {
+        if (valid && !loading) {
             setLoading(true);
             if (await VerifyEmail(data)) {
                 toast.promise(DoPost(data),
@@ -176,7 +176,11 @@ const SignUp = () => {
                         {loading ? 'Carregando...' : 'Criar conta'}
                     </Button>
                     <Text size="sm" style={{ marginTop: '20px', textAlign: 'center' }}>
-                        <LinkStyled href="/">Ja tem uma conta? faça login!</LinkStyled>
+                        <Link href="/Login">
+                            <LinkStyled>
+                                Ja tem uma conta? faça login!
+                            </LinkStyled>
+                        </Link>
                     </Text>
                 </Form>
             </LoginContainer>

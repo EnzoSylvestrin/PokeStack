@@ -13,6 +13,8 @@ export const theme: DefaultTheme = {
 
         },
         main: '#41ead4',
-        secondary: '#f71735'
+        secondary: '#f71735',
+        lightDark: '#222121',
+        headerColor: '#121212',
     }
 };
