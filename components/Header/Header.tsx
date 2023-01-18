@@ -1,17 +1,22 @@
+import Link from "next/link";
 import Button from "../Button/Button";
 import Heading from "../Heading/Heading";
-import { ButtonNotFilled, HeaderContainer, Ul } from "./HeaderStyled";
+import { HeaderContainer, LoginStyled, Logo, Ul } from "./HeaderStyled";
 
 function Header() {
     return (
         <header>
             <HeaderContainer>
-                <Heading style={{ marginLeft: '30px' }} size="lg">
-                    <p>PokeStack</p>
+                <Heading size="lg">
+                    <Logo>PokeStack</Logo>
                 </Heading>
                 <Ul>
-                    <li><ButtonNotFilled>Login</ButtonNotFilled></li>
-                    <li><Button>SingUp</Button></li>
+                    <li>
+                        <Link href="/Login"><LoginStyled>Login</LoginStyled></Link>
+                    </li>
+                    <li>
+                        <Link href="/SignUp"><Button>SignUp</Button></Link>
+                    </li>
                 </Ul>
             </HeaderContainer>
         </header>

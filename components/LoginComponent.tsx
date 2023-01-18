@@ -20,6 +20,8 @@ import Api from "../utils/Api";
 import { User } from "../pages/api/models/Types";
 import Link from "next/link";
 
+import Router from "next/router";
+
 type SubmitInputs = {
     email: string;
     password: string;
@@ -39,10 +41,7 @@ const LoginComponent = () => {
             const Users = await Api.get<Array<User>>('/GetAllUsers');
             for (let user of Users.data) {
                 if (user.email == data.email && user.password == data.password) {
-                    toast.success('Usuário válido', {
-                        position: 'bottom-center'
-                    });
-                    setLoading(false);
+                    Router.push('/');
                     return;
                 }
             }
@@ -86,7 +85,7 @@ const LoginComponent = () => {
                 </label>
                 <Button
                     type="submit"
-                    style={{ marginTop: '16px', alignSelf: "center", boxShadow: "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px" }}
+                    style={{ marginTop: '16px', alignSelf: "center" }}
                 >
                     {loading ? 'Carregando...' : 'Login'}
                 </Button>
