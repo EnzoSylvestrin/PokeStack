@@ -38,6 +38,7 @@ const LoginComponent = () => {
             const Users = await Api.get<User[]>('/GetAllUsers');
             for (let user of Users.data) {
                 if (user.email == data.email && user.password == data.password) {
+                    localStorage.setItem('Account', user._id);
                     Router.push('/');
                     return;
                 }
@@ -88,7 +89,7 @@ const LoginComponent = () => {
                 </Button>
                 <Text size="sm" style={{ marginTop: '20px' }}>
                     <Link href="/SignUp">
-                        <LinkStyled>Não tem uma conta ainda? crie uma agora! </LinkStyled>
+                        <LinkStyled>Não tem uma conta ainda? crie uma agora!</LinkStyled>
                     </Link>
                 </Text>
             </Form>
