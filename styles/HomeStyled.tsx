@@ -1,12 +1,19 @@
 import styled from "styled-components";
 import { motion } from 'framer-motion';
 
+import { Slot } from '@radix-ui/react-slot';
+
 export const HomeContainer = styled.section`
+    min-height: 100vh;
     width: 100%;
     padding-top: 10vh;
     display: flex;
     align-items: center;
     flex-direction: column;
+
+    @media (max-width: 500px) {
+        padding-top: 132px;
+    }
 `;
 
 export const WrapperFilters = styled.div`
@@ -29,6 +36,42 @@ export const WrapperCards = styled.div`
 
     @media (max-width: 1050px) {
         grid-template-columns: 1fr;
+    }
+`;
+
+
+export const ContainerSingle = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    position: relative;
+    
+    @media (max-width: 880px) {
+        a {
+            width: 88%;
+        }
+    }
+
+    @media (max-width: 600px) {
+        a {
+            margin-top: 60px;
+        }
+    }
+`;
+
+export const CloseButton = styled(Slot)`
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 30px;
+    height: 30px;
+    color: ${props => props.theme.colors.dark.textColor};
+
+    @media (max-width: 600px) {
+        left: 50%;
+        transform: translate(-50%, 0);
     }
 `;
 
@@ -64,7 +107,6 @@ export const Card = styled(motion.div)`
         margin-bottom: 15px;
 
         p {
-            margin-top: 10px;
             width: 40px;
             color: ${props => props.theme.colors.main};
         }

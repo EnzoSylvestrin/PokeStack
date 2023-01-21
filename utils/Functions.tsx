@@ -1,4 +1,4 @@
-import { PokemonClient, Pokemon } from 'pokenode-ts';
+import { Pokemon } from 'pokenode-ts';
 
 import { Circle, Hand, Lightbulb, Ruler } from "phosphor-react";
 
