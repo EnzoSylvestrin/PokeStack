@@ -55,7 +55,7 @@ function Header() {
                         :
                         Loading
                             ?
-                            <LoadingComponent />
+                            <LoadingComponent align="right" />
                             :
                             <Ul>
                                 <li>

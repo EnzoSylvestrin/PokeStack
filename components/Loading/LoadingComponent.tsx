@@ -2,14 +2,15 @@ import { Player } from '@lottiefiles/react-lottie-player';
 
 import { ContainerLoading } from './LoadingStyled';
 
-type Loading = {
+export type Loading = {
     w?: string | number,
-    h?: string | number
+    h?: string | number,
+    align?: 'left' | 'center' | 'right'
 }
 
-function LoadingComponent({ w = '80px', h = '80px' }: Loading) {
+function LoadingComponent({ w = '80px', h = '80px', align = "center" }: Loading) {
     return (
-        <ContainerLoading>
+        <ContainerLoading align={align}>
             <Player
                 autoplay
                 loop

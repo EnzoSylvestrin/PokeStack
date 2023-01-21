@@ -1,8 +1,28 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const ContainerLoading = styled.div`
+import { Loading } from "./LoadingComponent";
+
+export const ContainerLoading = styled.div<Loading>`
     flex: 1;
     display: flex;
     align-items: center;
-    justify-content: center;
+
+    ${props => {
+        switch (props.align) {
+            case "left":
+                return css`
+                    justify-content: start;
+                `
+            case "center":
+                return css`
+                    justify-content: center;
+                `
+            case "right":
+                return css`
+                    justify-content: end; 
+                `
+            default:
+                break;
+        }
+    }}
 `;
