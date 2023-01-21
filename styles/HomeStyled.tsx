@@ -26,6 +26,10 @@ export const WrapperCards = styled.div`
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     padding: 20px;
+
+    @media (max-width: 1050px) {
+        grid-template-columns: 1fr;
+    }
 `;
 
 export const Card = styled(motion.div)` 
@@ -44,6 +48,12 @@ export const Card = styled(motion.div)`
         width: 180px;
         height: 180px;
         margin-left: -60px;
+        filter: grayscale(0.5);
+        transition: all 0.3s ease;
+    }
+
+    :hover img {
+        filter: grayscale(0);
     }
 
     .title {
@@ -83,6 +93,54 @@ export const Card = styled(motion.div)`
             display: flex;
             align-items: center;
             gap: 5px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .title {
+            flex-direction: column-reverse;
+
+            p {
+                width: auto;
+            }
+
+            h2  {
+                padding: 0;
+            }
+        }
+
+        img {
+            margin: 0;
+        }
+
+        .infos {
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+
+            p {
+                flex: 1;
+            }
+        }
+    }
+
+    @media (max-width: 410px) {
+        .infos {
+            flex-direction: column;
+
+            .icon {
+                min-width: 200px;
+                width: auto;
+            }
+
+            & > :nth-child(2) {
+                margin-top: 10px;
+            }
         }
     }
 `;

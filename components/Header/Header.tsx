@@ -13,23 +13,28 @@ import Heading from "../Heading/Heading";
 
 import { AccountContainer, HeaderContainer, LoginStyled, Logo, Ul } from "./HeaderStyled";
 import { FormatUser } from "../../utils/Functions";
+import LoadingComponent from "../Loading/LoadingComponent";
 
 function Header() {
 
     const [Account, setAccount] = useState<User>();
+    const [Loading, setLoading] = useState<boolean>(false)
 
     useEffect(() => {
         const AccountId = localStorage.getItem('Account');
         if (AccountId) {
+            setLoading(true);
             (async () => {
                 try {
                     const Usuario: AxiosResponse<User> = await Api.get<User>(`/${AccountId}`);
                     setAccount(Usuario.data);
+                    setLoading(false);
                 }
                 catch (e) {
                     toast.error("Ocorreu um erro!", {
                         position: "bottom-right"
                     });
+                    setLoading(false);
                 }
             })();
         }
@@ -42,20 +47,24 @@ function Header() {
                     <Logo href="#top">PokeStack</Logo>
                 </Heading>
                 {
-                    Account != null
+                    Account != null && !Loading
                         ?
                         <AccountContainer>
                             <p>{FormatUser(Account.user)}</p>
                         </AccountContainer>
                         :
-                        <Ul>
-                            <li>
-                                <Link href="/Login"><LoginStyled>Login</LoginStyled></Link>
-                            </li>
-                            <li>
-                                <Link href="/SignUp"><Button>SignUp</Button></Link>
-                            </li>
-                        </Ul>
+                        Loading
+                            ?
+                            <LoadingComponent />
+                            :
+                            <Ul>
+                                <li>
+                                    <Link href="/Login"><LoginStyled>Login</LoginStyled></Link>
+                                </li>
+                                <li>
+                                    <Link href="/SignUp"><Button>SignUp</Button></Link>
+                                </li>
+                            </Ul>
                 }
             </HeaderContainer>
         </header>

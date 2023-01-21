@@ -177,7 +177,9 @@ const SignUp = () => {
                     </Button>
                     <Text size="sm" style={{ marginTop: '20px', textAlign: 'center' }}>
                         <Link href="/Login">
-                            <LinkStyled>
+                            <LinkStyled
+                                whileHover={{ scale: 0.98 }}
+                            >
                                 Ja tem uma conta? faça login!
                             </LinkStyled>
                         </Link>

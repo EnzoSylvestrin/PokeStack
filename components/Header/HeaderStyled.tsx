@@ -37,6 +37,7 @@ export const HeaderContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     position: fixed;
+    z-index: 999;
 
     @media (max-width: 500px) {
         height: auto;

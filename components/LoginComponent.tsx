@@ -89,7 +89,11 @@ const LoginComponent = () => {
                 </Button>
                 <Text size="sm" style={{ marginTop: '20px' }}>
                     <Link href="/SignUp">
-                        <LinkStyled>Não tem uma conta ainda? crie uma agora!</LinkStyled>
+                        <LinkStyled
+                            whileHover={{ scale: 0.98 }}
+                        >
+                            Não tem uma conta ainda? crie uma agora!
+                        </LinkStyled>
                     </Link>
                 </Text>
             </Form>

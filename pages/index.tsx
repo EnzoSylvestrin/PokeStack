@@ -1,21 +1,19 @@
 import { useEffect, useState } from 'react';
 
 import { ThemeProvider } from "styled-components";
-
 import { toast } from 'react-hot-toast';
-
 import { MagnifyingGlass } from 'phosphor-react';
-
 import { PokemonClient, Pokemon } from 'pokenode-ts';
 
 import HeadComponent from "../components/HeadCoponent";
 import Header from "../components/Header/Header";
 import { Input } from "../components/Input/Input";
 
-
 import { HomeContainer, WrapperFilters, WrapperCards } from "../styles/HomeStyled";
 import { theme } from "../styles/Theme";
+
 import { MakeCard } from '../utils/Functions';
+import LoadingComponent from '../components/Loading/LoadingComponent';
 
 //import Select from "react-select";
 
@@ -31,7 +29,7 @@ function Home() {
                 let PokeList: Pokemon[] = [];
                 let ListCards: JSX.Element[] = [];
 
-                let ListPokemons = await api.listPokemonSpecies(0, 0);
+                let ListPokemons = await api.listPokemons(0, 0);
                 await Promise.all(ListPokemons.results.map(async (results) => {
                     PokeList.push(await api.getPokemonByName(results.name));
                 }));
@@ -65,17 +63,15 @@ function Home() {
                         </Input.Root>
                     </label>
                 </WrapperFilters>
-                <WrapperCards>
-                    {
-                        pokemons.length != 0
-                            ?
-                            <>
-                                {pokemons}
-                            </>
-                            :
-                            ''
-                    }
-                </WrapperCards>
+                {
+                    pokemons.length > 0
+                        ?
+                        <WrapperCards>
+                            {pokemons}
+                        </WrapperCards>
+                        :
+                        <LoadingComponent w={'300px'} h={'300px'} />
+                }
             </HomeContainer>
         </ThemeProvider>
     );

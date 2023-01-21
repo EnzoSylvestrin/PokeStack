@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const LinkStyled = styled.p`
+import { motion } from 'framer-motion';
+
+export const LinkStyled = styled(motion.p)`
     text-decoration: underline;
     transition: all 0.3s ease;
 
