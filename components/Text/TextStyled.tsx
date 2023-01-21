@@ -19,6 +19,14 @@ export const TextStyled = styled(({ ...rest }: SlotProps) => <Slot {...rest} />)
                 return css`
                     font-size: 18px;
                 `
+            case "xl":
+                return css`
+                    font-size: 22px;
+                `
+            case "xxl":
+                return css`
+                    font-size: 24px;
+                `
             default:
                 break;
         }

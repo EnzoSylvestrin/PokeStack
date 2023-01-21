@@ -11,8 +11,7 @@ import { User } from "../../pages/api/models/Types";
 import Button from "../Button/Button";
 import Heading from "../Heading/Heading";
 
-import { HeaderContainer, LoginStyled, Logo, Ul } from "./HeaderStyled";
-import { AccountContainer } from "../../styles/Commom";
+import { AccountContainer, HeaderContainer, LoginStyled, Logo, Ul } from "./HeaderStyled";
 import { FormatUser } from "../../utils/Functions";
 
 function Header() {
@@ -37,10 +36,10 @@ function Header() {
     }, [])
 
     return (
-        <header>
+        <header id="top">
             <HeaderContainer>
                 <Heading size="lg">
-                    <Logo>PokeStack</Logo>
+                    <Logo href="#top">PokeStack</Logo>
                 </Heading>
                 {
                     Account != null

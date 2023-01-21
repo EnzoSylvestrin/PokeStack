@@ -4,7 +4,7 @@ import { TextStyled } from "./TextStyled";
 import { SlotProps } from '@radix-ui/react-slot';
 
 export type TextProps = SlotProps & {
-    size?: 'sm' | 'md' | 'lg';
+    size?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
     children: ReactNode;
 }
 

@@ -12,6 +12,7 @@ export const ContainerInput = styled.div`
     color: ${props => props.theme.colors.dark.textColor};
     border: 2px solid transparent;
     border-radius: 4px;
+    cursor: pointer;
 
     ::placeholder {
         color: #5c5b5c;

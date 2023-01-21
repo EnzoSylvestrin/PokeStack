@@ -1,7 +1,6 @@
-import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-export const Ul = styled(motion.ul)`
+export const Ul = styled.ul`
     list-style: none;
     display: flex;
     align-items: center;
@@ -9,7 +8,7 @@ export const Ul = styled(motion.ul)`
     margin-right: 50px;
 `;
 
-export const Logo = styled.p`
+export const Logo = styled.a`
     transition: all .3s ease;
     margin-left: 30px;
 
@@ -18,7 +17,17 @@ export const Logo = styled.p`
     }
 `;
 
-export const HeaderContainer = styled.nav`
+export const AccountContainer = styled.div`
+    border-radius: 4px;
+    font-size: 19px;
+    color: ${props => props.theme.colors.dark.textColor};
+    background-color: #262626;
+    border: 1.5px solid ${props => props.theme.colors.main};
+    padding: 8px;
+    margin-right: 20px;
+`;
+
+export const HeaderContainer = styled.div`
     width: 100%;
     height: 10vh;
     min-height: 65px;
@@ -42,10 +51,14 @@ export const HeaderContainer = styled.nav`
             margin: 0;
             margin-top: 10px;
         }
+
+        ${AccountContainer} {
+            margin: 20px;
+        }
     }
 `;
 
-export const LoginStyled = styled.a`
+export const LoginStyled = styled.p`
     color: ${props => props.theme.colors.dark.textColor};
     transition: all .3s ease;
     font-size: 18px;
