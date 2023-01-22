@@ -74,7 +74,6 @@ export const LoginStyled = styled.p`
 `;
 
 export const DivPopper = styled.div`
-    margin-top: 8px;
     background-color: ${props => props.theme.colors.lightDark};
     border: 1px solid ${props => props.theme.colors.main};
     border-radius: 6px;
@@ -96,8 +95,6 @@ export const TextEmail = styled.p`
 `;
 
 export const ContainerActions = styled.div`
-    margin-top: 5px;
-
     div {
         padding: 10px;
         display: flex;

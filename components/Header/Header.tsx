@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import Link from "next/link";
 import { AxiosResponse } from "axios";
@@ -32,8 +32,22 @@ function Header() {
     const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null);
     const [popperElement, setPopperElement] = useState<HTMLElement | null>(null);
     const [arrowElement, setArrowElement] = useState<HTMLElement | null>(null);
+
+    const customModifier = useMemo(
+        () => ({
+            name: 'offset',
+            options: {
+                offset: ({ placement, reference, popper }: any) => {
+                    return [-60, 8];
+                },
+            }
+        }),
+        []
+    );
+
+
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
-        modifiers: [{ name: 'arrow', options: { element: arrowElement } }],
+        modifiers: [customModifier],
     });
 
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -117,7 +131,6 @@ function Header() {
                                             </Text>
                                         </div>
                                     </ContainerActions>
-                                    <div ref={setArrowElement} style={styles.arrow} />
                                 </DivPopper>
                             )}
                         </>
