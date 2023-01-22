@@ -25,6 +25,10 @@ export const AccountContainer = styled.div`
     border: 1.5px solid ${props => props.theme.colors.main};
     padding: 8px;
     margin-right: 20px;
+
+    p::selection {
+        background-color: transparent;
+    }
 `;
 
 export const HeaderContainer = styled.div`
@@ -69,3 +73,44 @@ export const LoginStyled = styled.p`
     }
 `;
 
+export const DivPopper = styled.div`
+    margin-top: 8px;
+    background-color: ${props => props.theme.colors.lightDark};
+    border: 1px solid ${props => props.theme.colors.main};
+    border-radius: 6px;
+`;
+
+export const HeaderPopper = styled.div`
+    border-bottom: 1px solid ${props => props.theme.colors.main};
+`;
+
+export const TextEmail = styled.p`
+    padding: 10px;
+    color: #cfcece !important;
+    line-height: 20px;
+
+    span {
+        padding-top: 6px;
+        color: ${props => props.theme.colors.dark.textColor};
+    }
+`;
+
+export const ContainerActions = styled.div`
+    margin-top: 5px;
+
+    div {
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+
+        :hover {
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        :last-child {
+            border-radius: 0 0 8px 8px;
+        }
+    }
+`;

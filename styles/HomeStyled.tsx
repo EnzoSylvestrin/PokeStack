@@ -67,7 +67,7 @@ export const CloseButton = styled(Slot)`
     top: 20px;
     width: 30px;
     height: 30px;
-    color: ${props => props.theme.colors.dark.textColor};
+    color: ${props => props.theme.colors.secondary};
 
     @media (max-width: 600px) {
         left: 50%;

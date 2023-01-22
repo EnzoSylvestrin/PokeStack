@@ -14,6 +14,7 @@ import { theme } from "../styles/Theme";
 
 import { MakeCard } from '../utils/Functions';
 import LoadingComponent from '../components/Loading/LoadingComponent';
+import { usePopper } from 'react-popper';
 
 //import Select from "react-select";
 

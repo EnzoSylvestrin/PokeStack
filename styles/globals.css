@@ -25,3 +25,36 @@ select:-webkit-autofill:focus {
   -webkit-text-fill-color: white !important;
   -webkit-box-shadow: 0 0 0px 1000px #222121 inset;
 }
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #222121;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e8e8e8;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e8e8e8;
+}
+
+::-webkit-input-placeholder {
+  color: #e7e7e7e7;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  color: #e7e7e7e7;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+  color: #e7e7e7e7;  
+}
+
+:-ms-input-placeholder {  
+  color: #e7e7e7e7;  
+}

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const MONGODB_CONN_STR =  process.env.MONGODB_CONN_STR; //
+const MONGODB_CONN_STR =  process.env.MONGODB_CONN_STR;
 
 const databaseMiddleware = async (req, res, next) => {
 
