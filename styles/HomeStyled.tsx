@@ -39,6 +39,10 @@ export const WrapperCards = styled.div`
     }
 `;
 
+export const ContainerExpand = styled.div`
+    flex: 1;
+    padding: 20px 0;
+`;
 
 export const ContainerSingle = styled.div`
     width: 100%;

@@ -9,12 +9,13 @@ import HeadComponent from "../components/HeadCoponent";
 import Header from "../components/Header/Header";
 import { Input } from "../components/Input/Input";
 
-import { HomeContainer, WrapperFilters, WrapperCards, ContainerSingle, CloseButton } from "../styles/HomeStyled";
+import { HomeContainer, WrapperFilters, WrapperCards, ContainerSingle, CloseButton, ContainerExpand } from "../styles/HomeStyled";
 import { theme } from "../styles/Theme";
 
 import { MakeCard } from '../utils/Functions';
 import LoadingComponent from '../components/Loading/LoadingComponent';
 import { usePopper } from 'react-popper';
+import Button from '../components/Button/Button';
 
 //import Select from "react-select";
 
@@ -45,10 +46,14 @@ function Home() {
         }
     }
 
+    const ExpandPokemons = () => {
+        getPokemons(pokemons.length);
+    }
+
     const getPokemons = (limit = 0) => {
         (async () => {
             try {
-                let ListPokemons = await api.listPokemons(limit, limit);
+                let ListPokemons = await api.listPokemons(limit, 20);
                 await Promise.all(ListPokemons.results.map(async (results) => {
                     PokeList.push(await api.getPokemonByName(results.name));
                 }));
@@ -57,7 +62,7 @@ function Home() {
                     ListCards.push(MakeCard(pokemon));
                 }
 
-                setPokemons(ListCards)
+                setPokemons(pokemons.concat(ListCards))
             }
             catch (error) {
                 toast.error('Ocorreu um erro ao carregar os pokemons!', {
@@ -94,9 +99,14 @@ function Home() {
                 {
                     pokemons.length > 0 && !search
                         ?
-                        <WrapperCards>
-                            {pokemons}
-                        </WrapperCards>
+                        <>
+                            <WrapperCards>
+                                {pokemons}
+                            </WrapperCards>
+                            <ContainerExpand>
+                                <Button onClick={ExpandPokemons}>Ver mais</Button>
+                            </ContainerExpand>
+                        </>
                         :
                         search
                             ?

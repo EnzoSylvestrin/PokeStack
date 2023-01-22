@@ -8,19 +8,20 @@ import { usePopper } from 'react-popper';
 import Swal from 'sweetalert2';
 import { toast } from "react-hot-toast";
 
+import { Heart, SignOut } from "phosphor-react";
+
 import Api from "../../utils/Api";
 import { User } from "../../pages/api/models/Types";
 
 import Button from "../Button/Button";
 import Heading from "../Heading/Heading";
 
-import { AccountContainer, ContainerActions, DivPopper, HeaderContainer, HeaderPopper, LoginStyled, Logo, TextEmail, Ul } from "./HeaderStyled";
 import { FormatUser } from "../../utils/Functions";
+
+import { AccountContainer, ContainerActions, DivPopper, HeaderContainer, HeaderPopper, LoginStyled, Logo, TextEmail, Ul } from "./HeaderStyled";
 import LoadingComponent from "../Loading/LoadingComponent";
 import Text from "../Text/Text";
 import { Input } from "../Input/Input";
-import { Heart, SignOut } from "phosphor-react";
-
 
 function Header() {
 
@@ -31,20 +32,18 @@ function Header() {
 
     const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null);
     const [popperElement, setPopperElement] = useState<HTMLElement | null>(null);
-    const [arrowElement, setArrowElement] = useState<HTMLElement | null>(null);
 
     const customModifier = useMemo(
         () => ({
             name: 'offset',
             options: {
-                offset: ({ placement, reference, popper }: any) => {
-                    return [-60, 8];
+                offset: () => {
+                    return [0, 8];
                 },
             }
         }),
         []
     );
-
 
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
         modifiers: [customModifier],
