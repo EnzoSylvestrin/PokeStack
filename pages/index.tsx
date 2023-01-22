@@ -31,34 +31,32 @@ function Home() {
 
     const [loading, setLoading] = useState<boolean>();
 
-    const DoSearch = (e: KeyboardEvent<HTMLInputElement>) => {
+    const DoSearch = async (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            (async () => {
-                try {
-                    let Pokemon = await api.getPokemonByName(e.currentTarget.value);
-                    let Favorites = await getFavorites();
-                    let Filled = false;
-                    if (Favorites != null) {
-                        for (let Favorite of Favorites) {
-                            if (Favorite == Pokemon.order) {
-                                Filled = true;
-                                break
-                            }
+            try {
+                let Pokemon = await api.getPokemonByName(e.currentTarget.value);
+                let Favorites = await getFavorites();
+                let Filled = false;
+                if (Favorites != null) {
+                    for (let Favorite of Favorites) {
+                        if (Favorite == Pokemon.order) {
+                            Filled = true;
+                            break
                         }
                     }
-                    else {
-                        Filled = false;
-                    }
-                    setSearch(<CardComponent pokemon={Pokemon} filled={Filled} />);
                 }
-                catch (error) {
-                    toast.error('Não foi encontrado nenhum pokemon com esse nome!', {
-                        position: "bottom-left",
-                        id: 'error',
-                        duration: 1500
-                    });
+                else {
+                    Filled = false;
                 }
-            })();
+                setSearch(<CardComponent pokemon={Pokemon} filled={Filled} key={Pokemon.order} />);
+            }
+            catch (error) {
+                toast.error('Não foi encontrado nenhum pokemon com esse nome!', {
+                    position: "bottom-left",
+                    id: 'error',
+                    duration: 1500
+                });
+            }
         }
     }
 
