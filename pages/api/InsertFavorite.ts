@@ -11,7 +11,7 @@ InsertFavorites.post(async (req : any, res : any) => {
 
         const Favorite : any = await Model.find({User: data.id});
 
-        //if (Favorite.lenght == 0) {
+        if (Favorite.length == 0) {
             await Model.create({
                 orders: [data.order],
                 User: data.id
@@ -20,14 +20,26 @@ InsertFavorites.post(async (req : any, res : any) => {
             }).catch((error) => {
                 res.status(400).send(error);
             });
-        // }
-        // else {
-        //     let update = {
-        //         order: [...Favorite.orders, data.orders] 
-        //     }
+        }
+        else {
 
-        //     await Model.findByIdAndUpdate({User: data.id}, update);
-        // }
+            let filter = {
+                User: data.id
+            }
+
+            let update = { 
+                $push: { orders: data.order } 
+            }
+
+            await Model.findOneAndUpdate(
+                filter,
+                update
+            ).then((response) => {
+                res.status(200).send(response);
+            }).catch((error) => {
+                res.status(400).send(error);
+            });
+        }
     }
     catch (error) {
         res.status(400).send(error);
