@@ -1,15 +1,17 @@
-import { createHandler } from './connection/CreateHandler';
-import { NextRequest } from 'next/server';
 import Model from './schemas/FavoritesModel';
-import { Favorites, User } from './models/Types';
+import { Favorites } from './models/Types';
+
+import { createHandler } from './connection/CreateHandler';
 
 const connection = createHandler();
 
-connection.get(async (req: NextRequest, res: any) => {
+connection.post(async (req: any, res: any) => {
 
-    const Favorites: Favorites[] = await Model.find({}).exec();
+    let id = req.body.User;
 
-    res.status(200).json(Favorites);
+    const Favorite: Favorites = await Model.findOne({User: id}).exec();
+
+    res.status(200).json(Favorite);
 
 });
 

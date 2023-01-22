@@ -15,6 +15,8 @@ import { HomeContainer, WrapperFilters, WrapperCards, ContainerSingle, CloseButt
 import { theme } from "../styles/Theme";
 
 import CardComponent from '../components/Card/Card';
+import Api from '../utils/Api';
+import { Favorites } from './api/models/Types';
 
 //import Select from "react-select";
 
@@ -34,7 +36,20 @@ function Home() {
             (async () => {
                 try {
                     let Pokemon = await api.getPokemonByName(e.currentTarget.value);
-                    setSearch(<CardComponent pokemon={Pokemon} filled={false} />);
+                    let Favorites = await getFavorites();
+                    let Filled = false;
+                    if (Favorites != null) {
+                        for (let Favorite of Favorites) {
+                            if (Favorite == Pokemon.order) {
+                                Filled = true;
+                                break
+                            }
+                        }
+                    }
+                    else {
+                        Filled = false;
+                    }
+                    setSearch(<CardComponent pokemon={Pokemon} filled={Filled} />);
                 }
                 catch (error) {
                     toast.error('Não foi encontrado nenhum pokemon com esse nome!', {
@@ -54,6 +69,22 @@ function Home() {
         }
     }
 
+    const getFavorites = async () => {
+        let Userid = localStorage.getItem('Account');
+        if (Userid != null) {
+            const Favorites = await Api.post<Favorites>('/GetFavorites', { User: Userid });
+            if (Favorites.data != null) {
+                return Favorites.data.orders;
+            }
+            else {
+                return null;
+            }
+        }
+        else {
+            return null;
+        }
+    }
+
     const getPokemons = async (limit = 0) => {
         try {
             let ListPokemons = await api.listPokemons(limit, 20);
@@ -61,8 +92,22 @@ function Home() {
                 PokeList.push(await api.getPokemonByName(results.name));
             }));
 
+            let Favorites = await getFavorites();
+
             for (let Pokemon of PokeList.sort((a: Pokemon, b: Pokemon) => a.order - b.order)) {
-                ListCards.push(<CardComponent pokemon={Pokemon} filled={false} key={Pokemon.order} />);
+                let Filled = false;
+                if (Favorites != null) {
+                    for (let Favorite of Favorites) {
+                        if (Favorite == Pokemon.order) {
+                            Filled = true;
+                            break
+                        }
+                    }
+                }
+                else {
+                    Filled = false;
+                }
+                ListCards.push(<CardComponent pokemon={Pokemon} filled={Filled} key={Pokemon.order} />);
             }
 
             setPokemons(pokemons.concat(ListCards))
