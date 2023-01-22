@@ -8,14 +8,13 @@ import { PokemonClient, Pokemon } from 'pokenode-ts';
 import HeadComponent from "../components/HeadCoponent";
 import Header from "../components/Header/Header";
 import { Input } from "../components/Input/Input";
+import LoadingComponent from '../components/Loading/LoadingComponent';
+import Button from '../components/Button/Button';
 
 import { HomeContainer, WrapperFilters, WrapperCards, ContainerSingle, CloseButton, ContainerExpand } from "../styles/HomeStyled";
 import { theme } from "../styles/Theme";
 
-import { MakeCard } from '../utils/Functions';
-import LoadingComponent from '../components/Loading/LoadingComponent';
-import { usePopper } from 'react-popper';
-import Button from '../components/Button/Button';
+import CardComponent from '../components/Card/Card';
 
 //import Select from "react-select";
 
@@ -28,12 +27,14 @@ function Home() {
     const [pokemons, setPokemons] = useState<JSX.Element[]>([]);
     const [search, setSearch] = useState<JSX.Element>();
 
+    const [loading, setLoading] = useState<boolean>();
+
     const DoSearch = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             (async () => {
                 try {
-                    let pokemon = await api.getPokemonByName(e.currentTarget.value);
-                    setSearch(MakeCard(pokemon));
+                    let Pokemon = await api.getPokemonByName(e.currentTarget.value);
+                    setSearch(<CardComponent pokemon={Pokemon} filled={false} />);
                 }
                 catch (error) {
                     toast.error('Não foi encontrado nenhum pokemon com esse nome!', {
@@ -47,33 +48,35 @@ function Home() {
     }
 
     const ExpandPokemons = () => {
-        getPokemons(pokemons.length);
+        if (!loading) {
+            setLoading(true);
+            getPokemons(pokemons.length);
+        }
     }
 
-    const getPokemons = (limit = 0) => {
-        (async () => {
-            try {
-                let ListPokemons = await api.listPokemons(limit, 20);
-                await Promise.all(ListPokemons.results.map(async (results) => {
-                    PokeList.push(await api.getPokemonByName(results.name));
-                }));
+    const getPokemons = async (limit = 0) => {
+        try {
+            let ListPokemons = await api.listPokemons(limit, 20);
+            await Promise.all(ListPokemons.results.map(async (results) => {
+                PokeList.push(await api.getPokemonByName(results.name));
+            }));
 
-                for (let pokemon of PokeList.sort((a: Pokemon, b: Pokemon) => a.order - b.order)) {
-                    ListCards.push(MakeCard(pokemon));
-                }
+            for (let Pokemon of PokeList.sort((a: Pokemon, b: Pokemon) => a.order - b.order)) {
+                ListCards.push(<CardComponent pokemon={Pokemon} filled={false} key={Pokemon.order} />);
+            }
 
-                setPokemons(pokemons.concat(ListCards))
-            }
-            catch (error) {
-                toast.error('Ocorreu um erro ao carregar os pokemons!', {
-                    position: 'bottom-center'
-                });
-            }
-        })();
+            setPokemons(pokemons.concat(ListCards))
+            setLoading(false);
+        }
+        catch (error) {
+            console.log(error);
+            toast.error('Ocorreu um erro ao carregar os pokemons!', {
+                position: 'bottom-center'
+            });
+        }
     }
 
     const CloseAction = () => {
-        getPokemons();
         setSearch(undefined);
     }
 
@@ -103,9 +106,15 @@ function Home() {
                             <WrapperCards>
                                 {pokemons}
                             </WrapperCards>
-                            <ContainerExpand>
-                                <Button onClick={ExpandPokemons}>Ver mais</Button>
-                            </ContainerExpand>
+                            {
+                                loading
+                                    ?
+                                    <LoadingComponent />
+                                    :
+                                    <ContainerExpand>
+                                        <Button onClick={ExpandPokemons}>Ver mais</Button>
+                                    </ContainerExpand>
+                            }
                         </>
                         :
                         search

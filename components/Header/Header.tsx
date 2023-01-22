@@ -38,7 +38,7 @@ function Header() {
             name: 'offset',
             options: {
                 offset: () => {
-                    return [0, 8];
+                    return [0, 4];
                 },
             }
         }),

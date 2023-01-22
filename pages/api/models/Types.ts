@@ -4,3 +4,8 @@ export type User = {
     user: string,
     password: string
 };
+
+export type Favorites = {
+    idUser: string,
+    orders: number[]
+}
