@@ -3,11 +3,8 @@ import Link from 'next/link';
 
 import { Pokemon } from 'pokenode-ts';
 import { toast } from 'react-hot-toast';
-import { AxiosResponse } from 'axios';
 
 import { Circle, Hand, Heart, Lightbulb, Ruler } from "phosphor-react";
-
-import { User } from '../../pages/api/models/Types';
 
 import Api from '../../utils/Api';
 
@@ -30,30 +27,45 @@ type PostFavorite = {
 function Card({ pokemon, filled }: Card) {
 
     const [fill, setFill] = useState(filled);
+    const [loading, setLoading] = useState(false);
 
-    const DoPost = async ({ order, id }: PostFavorite) => {
-        console.log(await Api.post('/InsertFavorite', { id, order }));
+    const DoPostInsert = async ({ order, id }: PostFavorite) => {
+        await Api.post('/InsertFavorite', { id, order });
+        setLoading(false);
+        console.log('acabou');
+    }
+
+    const DoPostDelete = async ({ order, id }: PostFavorite) => {
+        await Api.post('/DeleteFavorite', { id, order });
+        setLoading(false);
     }
 
     const handleClickHeart = async (event: React.MouseEvent<HTMLElement>) => {
         event.preventDefault();
-
-        let idUser = localStorage.getItem('Account');
-        if (idUser != null) {
-            let PostObj: PostFavorite = {
-                id: idUser,
-                order: pokemon.order
+        if (!loading) {
+            setLoading(true);
+            let idUser = localStorage.getItem('Account');
+            if (idUser != null) {
+                let PostObj: PostFavorite = {
+                    id: idUser,
+                    order: pokemon.order
+                }
+                if (!filled) {
+                    DoPostInsert(PostObj);
+                    setFill(!filled);
+                }
+                else {
+                    DoPostDelete(PostObj);
+                    setFill(!filled);
+                }
             }
-            DoPost(PostObj);
-            setFill(true);
-
-        }
-        else {
-            toast.error('Faça login para favoritar algum pokemon!', {
-                position: 'bottom-right',
-                id: 'Login',
-                duration: 1500,
-            })
+            else {
+                toast.error('Faça login para favoritar algum pokemon!', {
+                    position: 'bottom-right',
+                    id: 'Login',
+                    duration: 1500,
+                })
+            }
         }
     }
 

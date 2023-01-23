@@ -36,18 +36,7 @@ function Home() {
             try {
                 let Pokemon = await api.getPokemonByName(e.currentTarget.value);
                 let Favorites = await getFavorites();
-                let Filled = false;
-                if (Favorites != null) {
-                    for (let Favorite of Favorites) {
-                        if (Favorite == Pokemon.order) {
-                            Filled = true;
-                            break
-                        }
-                    }
-                }
-                else {
-                    Filled = false;
-                }
+                let Filled = VerifyFavorite(Favorites, Pokemon);
                 setSearch(<CardComponent pokemon={Pokemon} filled={Filled} key={Pokemon.order} />);
             }
             catch (error) {
@@ -83,6 +72,20 @@ function Home() {
         }
     }
 
+    const VerifyFavorite = (Favorites: Number[] | null, Pokemon: Pokemon) => {
+        if (Favorites != null) {
+            for (let Favorite of Favorites) {
+                if (Favorite == Pokemon.order) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        else {
+            return false;
+        }
+    }
+
     const getPokemons = async (limit = 0) => {
         try {
             let ListPokemons = await api.listPokemons(limit, 20);
@@ -93,18 +96,8 @@ function Home() {
             let Favorites = await getFavorites();
 
             for (let Pokemon of PokeList.sort((a: Pokemon, b: Pokemon) => a.order - b.order)) {
-                let Filled = false;
-                if (Favorites != null) {
-                    for (let Favorite of Favorites) {
-                        if (Favorite == Pokemon.order) {
-                            Filled = true;
-                            break
-                        }
-                    }
-                }
-                else {
-                    Filled = false;
-                }
+                let Filled = VerifyFavorite(Favorites, Pokemon);
+
                 ListCards.push(<CardComponent pokemon={Pokemon} filled={Filled} key={Pokemon.order} />);
             }
 

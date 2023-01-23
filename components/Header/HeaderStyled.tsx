@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { Slot } from '@radix-ui/react-slot';
+
 export const Ul = styled.ul`
     list-style: none;
     display: flex;
@@ -18,16 +20,30 @@ export const Logo = styled.a`
 `;
 
 export const AccountContainer = styled.div`
-    border-radius: 4px;
+    border-radius: 8px;
     font-size: 19px;
     color: ${props => props.theme.colors.dark.textColor};
     background-color: #262626;
     border: 1.5px solid ${props => props.theme.colors.main};
     padding: 8px;
     margin-right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 
     p::selection {
         background-color: transparent;
+    }
+`;
+
+export const ContainerCaret = styled(Slot)`
+    width: 19px;
+    height: 19px;
+    color: ${props => props.theme.colors.main};
+    transition: all 0.3s ease;
+
+    &.turn {
+        transform: rotate(90deg);
     }
 `;
 

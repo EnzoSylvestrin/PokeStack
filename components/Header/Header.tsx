@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useRef } from "react";
 
 import Link from "next/link";
 import { AxiosResponse } from "axios";
@@ -8,22 +8,25 @@ import { usePopper } from 'react-popper';
 import Swal from 'sweetalert2';
 import { toast } from "react-hot-toast";
 
-import { Heart, SignOut } from "phosphor-react";
+import { CaretRight, Heart, IconProps, SignOut } from "phosphor-react";
 
 import Api from "../../utils/Api";
 import { User } from "../../pages/api/models/Types";
 
 import Button from "../Button/Button";
 import Heading from "../Heading/Heading";
-
-import { FormatUser } from "../../utils/Functions";
-
-import { AccountContainer, ContainerActions, DivPopper, HeaderContainer, HeaderPopper, LoginStyled, Logo, TextEmail, Ul } from "./HeaderStyled";
 import LoadingComponent from "../Loading/LoadingComponent";
 import Text from "../Text/Text";
 import { Input } from "../Input/Input";
 
+import { FormatUser } from "../../utils/Functions";
+
+import { AccountContainer, ContainerActions, ContainerCaret, DivPopper, HeaderContainer, HeaderPopper, LoginStyled, Logo, TextEmail, Ul } from "./HeaderStyled";
+
+
 function Header() {
+
+    const IconRef = useRef<any>(null);
 
     const [Account, setAccount] = useState<User>();
     const [Loading, setLoading] = useState<boolean>(false);
@@ -52,6 +55,7 @@ function Header() {
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setReferenceElement(event.currentTarget);
         setShowList(!showList);
+        IconRef.current.classList.toggle('turn');
     }
 
     const handleSignOut = (event: React.MouseEvent<HTMLElement>) => {
@@ -105,6 +109,9 @@ function Header() {
                         <>
                             <AccountContainer onClick={handleClick}>
                                 <p>{FormatUser(Account.user)}</p>
+                                <ContainerCaret>
+                                    <CaretRight ref={IconRef} />
+                                </ContainerCaret>
                             </AccountContainer>
 
                             {showList && (
