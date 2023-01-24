@@ -58,7 +58,7 @@ function Home() {
     const VerifyFavorite = (Favorites: Number[] | null, Pokemon: Pokemon) => {
         if (Favorites != null) {
             for (let Favorite of Favorites) {
-                if (Favorite == Pokemon.order) {
+                if (Favorite == Pokemon.id) {
                     return true;
                 }
             }
