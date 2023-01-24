@@ -19,7 +19,7 @@ import LoadingComponent from "../Loading/LoadingComponent";
 import Text from "../Text/Text";
 import { Input } from "../Input/Input";
 
-import { FormatUser } from "../../utils/Functions";
+import { FormatUser, getFavorites } from "../../utils/Functions";
 
 import { AccountContainer, ContainerActions, ContainerCaret, DivPopper, HeaderContainer, HeaderPopper, LoginStyled, Logo, TextEmail, Ul } from "./HeaderStyled";
 import Router, { useRouter } from "next/router";
@@ -60,8 +60,18 @@ function Header() {
         IconRef.current.classList.toggle('turn');
     }
 
-    const handleFavorites = () => {
-        Router.push('/Favorites');
+    const handleFavorites = async () => {
+        let favorites = await getFavorites();
+        if (favorites == null) {
+            toast.error('Você ainda não tem nenhum favorito!', {
+                id: 'Favorite',
+                duration: 1500,
+                position: 'bottom-center'
+            });
+        }
+        else {
+            Router.push('/Favorites');
+        }
     }
 
     const handleSignOut = (event: React.MouseEvent<HTMLElement>) => {

@@ -15,8 +15,6 @@ import { HomeContainer, WrapperFilters, WrapperCards, ContainerSingle, CloseButt
 import { theme } from "../styles/Theme";
 
 import CardComponent from '../components/Card/Card';
-import Api from '../utils/Api';
-import { Favorites } from './api/models/Types';
 import { getFavorites } from '../utils/Functions';
 
 //import Select from "react-select";
