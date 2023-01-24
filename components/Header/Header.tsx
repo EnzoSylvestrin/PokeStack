@@ -22,9 +22,11 @@ import { Input } from "../Input/Input";
 import { FormatUser } from "../../utils/Functions";
 
 import { AccountContainer, ContainerActions, ContainerCaret, DivPopper, HeaderContainer, HeaderPopper, LoginStyled, Logo, TextEmail, Ul } from "./HeaderStyled";
-
+import Router, { useRouter } from "next/router";
 
 function Header() {
+
+    const router = useRouter()
 
     const IconRef = useRef<any>(null);
 
@@ -58,6 +60,10 @@ function Header() {
         IconRef.current.classList.toggle('turn');
     }
 
+    const handleFavorites = () => {
+        Router.push('/Favorites');
+    }
+
     const handleSignOut = (event: React.MouseEvent<HTMLElement>) => {
         Swal.fire({
             title: 'Atenção...',
@@ -73,6 +79,7 @@ function Header() {
             if (result.isConfirmed) {
                 localStorage.removeItem('Account');
                 setAccount(undefined);
+                router.reload();
             }
         });
     }
@@ -120,8 +127,8 @@ function Header() {
                                         <Text size="sm"><TextEmail>Logado com o email: <br /><span>{Account.email}</span></TextEmail></Text>
                                     </HeaderPopper>
                                     <ContainerActions>
-                                        <div>
-                                            <Input.Icon>
+                                        <div onClick={handleFavorites}>
+                                            <Input.Icon >
                                                 <Heart />
                                             </Input.Icon>
                                             <Text>

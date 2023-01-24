@@ -17,6 +17,7 @@ import { theme } from "../styles/Theme";
 import CardComponent from '../components/Card/Card';
 import Api from '../utils/Api';
 import { Favorites } from './api/models/Types';
+import { getFavorites } from '../utils/Functions';
 
 //import Select from "react-select";
 
@@ -53,22 +54,6 @@ function Home() {
         if (!loading) {
             setLoading(true);
             getPokemons(pokemons.length);
-        }
-    }
-
-    const getFavorites = async () => {
-        let Userid = localStorage.getItem('Account');
-        if (Userid != null) {
-            const Favorites = await Api.post<Favorites>('/GetFavorites', { User: Userid });
-            if (Favorites.data != null) {
-                return Favorites.data.orders;
-            }
-            else {
-                return null;
-            }
-        }
-        else {
-            return null;
         }
     }
 

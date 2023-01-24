@@ -32,7 +32,6 @@ function Card({ pokemon, filled }: Card) {
     const DoPostInsert = async ({ order, id }: PostFavorite) => {
         await Api.post('/InsertFavorite', { id, order });
         setLoading(false);
-        console.log('acabou');
     }
 
     const DoPostDelete = async ({ order, id }: PostFavorite) => {
@@ -50,14 +49,13 @@ function Card({ pokemon, filled }: Card) {
                     id: idUser,
                     order: pokemon.order
                 }
-                if (!filled) {
+                if (!fill) {
                     DoPostInsert(PostObj);
-                    setFill(!filled);
                 }
                 else {
                     DoPostDelete(PostObj);
-                    setFill(!filled);
                 }
+                setFill(!fill);
             }
             else {
                 toast.error('Faça login para favoritar algum pokemon!', {

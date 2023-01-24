@@ -30,6 +30,7 @@ export const AccountContainer = styled.div`
     display: flex;
     align-items: center;
     gap: 6px;
+    cursor: pointer;
 
     p::selection {
         background-color: transparent;
