@@ -1,11 +1,13 @@
 <h1 align="center">
- PokeStack
+  <a href="https://poke-stack.vercel.app">PokeStack</a>
 </h1>
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/EnzoSylvestrin/PokeStack?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/EnzoSylvestrin/PokeStack?style=for-the-badge)
 
-<h2>🚧 O projeto ainda está em construção! 🚧</h2>
+![Resultado final do projeto](img-app.png)
+
+<h4 align="center"><a href="https://poke-stack.vercel.app">Clique para visitar o projeto</a></h4>
 
 ## 📚 Introdução 
 
