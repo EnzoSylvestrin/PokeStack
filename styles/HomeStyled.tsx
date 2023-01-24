@@ -77,18 +77,3 @@ export const CloseButton = styled(Slot)`
         transform: translate(-50%, 0);
     }
 `;
-
-export const DivBack = styled.div`
-    width: 100%;
-    padding: 10px 20px 0 20px;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-`;
-
-export const BackButton = styled(Slot)`
-    cursor: pointer;
-    width: 36px;
-    height: 36px;
-    color: ${props => props.theme.colors.secondary};
-`;

@@ -14,10 +14,10 @@ import HeadComponent from "../components/HeadCoponent";
 import Header from "../components/Header/Header";
 import LoadingComponent from '../components/Loading/LoadingComponent';
 
-import { BackButton, DivBack, HomeContainer, WrapperCards } from '../styles/HomeStyled';
+import { WrapperCards, HomeContainer } from '../styles/HomeStyled';
 
 import { getFavorites } from '../utils/Functions';
-import { ArrowArcLeft } from 'phosphor-react';
+import BackComponent from '../components/BackComponent';
 
 function Favorites() {
 
@@ -43,10 +43,6 @@ function Favorites() {
         }
     }
 
-    const handleBack = () => {
-        Router.back();
-    }
-
     useEffect(() => {
         (async () => {
             let favorites = await getFavorites();
@@ -67,11 +63,7 @@ function Favorites() {
             <HeadComponent />
             <Header />
             <HomeContainer>
-                <DivBack>
-                    <BackButton onClick={handleBack}>
-                        <ArrowArcLeft />
-                    </BackButton>
-                </DivBack>
+                <BackComponent />
                 {
                     pokemons.length > 0
                         ?

@@ -14,7 +14,7 @@ import { Input } from '../Input/Input';
 
 import { CardStyled, ContainerHeart } from "./CardStyled";
 
-export type Card = {
+export type CardProps = {
     pokemon: Pokemon,
     filled: boolean
 }
@@ -24,7 +24,7 @@ type PostFavorite = {
     order: number
 }
 
-function Card({ pokemon, filled }: Card) {
+function Card({ pokemon, filled }: CardProps) {
 
     const [fill, setFill] = useState(filled);
     const [loading, setLoading] = useState(false);
@@ -68,7 +68,7 @@ function Card({ pokemon, filled }: Card) {
     }
 
     return (
-        <Link href="/Login">
+        <Link href={`/${pokemon.id}`}>
             <CardStyled
                 initial={{ opacity: 0, scale: 0.6 }}
                 whileInView={{ opacity: 1, scale: 1 }} //onScroll
@@ -82,14 +82,14 @@ function Card({ pokemon, filled }: Card) {
                 <img src={pokemon.sprites.front_default?.toString()} alt="Imagem do pokemon" />
                 <div className='infos'>
                     <div className='title'>
-                        <Text size='xxl'><p>{`#${pokemon.order}`}</p></Text>
+                        <Text size='xxl'><p>{`#${pokemon.order} `}</p></Text>
                         <Heading size='lg'><h2><span>{pokemon.name.toUpperCase()}</span></h2></Heading>
                     </div>
                     <div className="icon">
                         <Input.Icon>
                             <Ruler />
                         </Input.Icon>
-                        <Text size='xxl'><p>{`${pokemon.height / 10}m`}</p></Text>
+                        <Text size='xxl'><p>{`${pokemon.height / 10} m`}</p></Text>
                     </div>
                     <div className="icon">
                         <Input.Icon>
@@ -111,7 +111,7 @@ function Card({ pokemon, filled }: Card) {
                     </div>
                 </div>
             </CardStyled>
-        </Link>
+        </Link >
     );
 }
 

@@ -8,7 +8,7 @@ import { usePopper } from 'react-popper';
 import Swal from 'sweetalert2';
 import { toast } from "react-hot-toast";
 
-import { CaretRight, Heart, IconProps, SignOut } from "phosphor-react";
+import { CaretRight, CaretUp, Heart, SignOut } from "phosphor-react";
 
 import Api from "../../utils/Api";
 import { User } from "../../pages/api/models/Types";
@@ -21,7 +21,7 @@ import { Input } from "../Input/Input";
 
 import { FormatUser, getFavorites } from "../../utils/Functions";
 
-import { AccountContainer, ContainerActions, ContainerCaret, DivPopper, HeaderContainer, HeaderPopper, LoginStyled, Logo, TextEmail, Ul } from "./HeaderStyled";
+import { AccountContainer, ArrowMenu, ContainerActions, ContainerCaret, DivPopper, HeaderContainer, HeaderPopper, LoginStyled, Logo, TextEmail, Ul } from "./HeaderStyled";
 import Router, { useRouter } from "next/router";
 
 function Header() {
@@ -43,7 +43,7 @@ function Header() {
             name: 'offset',
             options: {
                 offset: () => {
-                    return [0, 4];
+                    return [0, 16];
                 },
             }
         }),
@@ -133,6 +133,9 @@ function Header() {
 
                             {showList && (
                                 <DivPopper ref={setPopperElement} style={styles.popper} {...attributes.popper}>
+                                    <ArrowMenu>
+                                        <CaretUp weight="fill" />
+                                    </ArrowMenu>
                                     <HeaderPopper>
                                         <Text size="sm"><TextEmail>Logado com o email: <br /><span>{Account.email}</span></TextEmail></Text>
                                     </HeaderPopper>

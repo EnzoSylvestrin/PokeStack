@@ -31,10 +31,21 @@ export const AccountContainer = styled.div`
     align-items: center;
     gap: 6px;
     cursor: pointer;
+    position: relative;
 
     p::selection {
         background-color: transparent;
     }
+`;
+
+export const ArrowMenu = styled(Slot)`
+    position: absolute;
+    top: -20px;
+    height: 30px;
+    width: 30px;
+    right: 30%;
+    transform: translate(30%, 0);
+    color: ${props => props.theme.colors.main};
 `;
 
 export const ContainerCaret = styled(Slot)`
