@@ -47,7 +47,7 @@ function Card({ pokemon, filled }: Card) {
             if (idUser != null) {
                 let PostObj: PostFavorite = {
                     id: idUser,
-                    order: pokemon.order
+                    order: pokemon.id
                 }
                 if (!fill) {
                     DoPostInsert(PostObj);

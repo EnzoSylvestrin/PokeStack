@@ -81,7 +81,7 @@ function Home() {
             for (let Pokemon of PokeList.sort((a: Pokemon, b: Pokemon) => a.order - b.order)) {
                 let Filled = VerifyFavorite(Favorites, Pokemon);
 
-                ListCards.push(<CardComponent pokemon={Pokemon} filled={Filled} key={Pokemon.order} />);
+                ListCards.push(<CardComponent pokemon={Pokemon} filled={Filled} key={Pokemon.id} />);
             }
 
             setPokemons(pokemons.concat(ListCards))
