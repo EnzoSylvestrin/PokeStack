@@ -69,20 +69,14 @@ function Card({ pokemon, filled }: CardProps) {
 
     return (
         <Link href={`/${pokemon.id}`}>
-            <CardStyled
-                initial={{ opacity: 0, scale: 0.6 }}
-                whileInView={{ opacity: 1, scale: 1 }} //onScroll
-                whileHover={{ scale: 0.98 }}
-                transition={{ duration: 0.4 }}
-                viewport={{ once: true }}
-            >
+            <CardStyled className={`${pokemon.types[0].type?.name.charAt(0).toUpperCase()}${pokemon.types[0].type?.name.substring(1)}`}>
                 <ContainerHeart onClick={handleClickHeart}>
                     <Heart weight={fill ? 'fill' : 'regular'} />
                 </ContainerHeart>
                 <img src={pokemon.sprites.front_default?.toString()} alt="Imagem do pokemon" />
                 <div className='infos'>
                     <div className='title'>
-                        <Text size='xxl'><p>{`#${pokemon.order} `}</p></Text>
+                        <Text size='xxl'><p>{`#${pokemon.id} `}</p></Text>
                         <Heading size='lg'><h2><span>{pokemon.name.toUpperCase()}</span></h2></Heading>
                     </div>
                     <div className="icon">

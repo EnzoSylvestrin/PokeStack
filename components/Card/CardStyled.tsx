@@ -31,9 +31,14 @@ export const CardStyled = styled(motion.div)`
     padding: 20px 10px;
     border-radius: 10px;
     background-color: #262626;
-    border: 1px solid ${props => props.theme.colors.secondary};
     text-align: center;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     position: relative;
+    transition: 0.5s ease-in-out all;
+
+    &:hover {
+        transform: scale(0.98);
+    }
 
     img {
         border-radius: 50%;
@@ -66,9 +71,116 @@ export const CardStyled = styled(motion.div)`
         }
         
         span {
-            background: linear-gradient(to right, ${props => props.theme.colors.secondary}, ${props => props.theme.colors.main});
-            -webkit-background-clip: text;
-            color: transparent;
+            color: ${props => props.theme.colors.dark.textColor};
+        }
+    }
+
+    &.Normal {
+        border: 1px solid #6d6d4e;
+        &:hover {
+            background-color: #a8a878;
+        }
+    }
+    &.Fire {
+        border: 1px solid #9c531f;
+        &:hover {
+        background-color: #f08030;
+        }
+    }
+    &.Water {
+        border: 1px solid #445e9c;
+        &:hover {
+        background-color: #6890f0;
+        }
+    }
+    &.Electric {
+        border: 1px solid #a1871f;
+        &:hover {
+        background-color: #f8d030;
+        }
+    }
+    &.Grass {
+        border: 1px solid #4e8234;
+        &:hover {
+        background-color: #78c850;
+        }
+    }
+    &.Ice {
+        border: 1px solid #638d8d;
+        &:hover {
+        background-color: #98d8d8;
+        }
+    }
+    &.Ground {
+        border: 1px solid #927d44;
+        &:hover {
+        background-color: #e0c068;
+        }
+    }
+    &.Flying {
+        border: 1px solid #6d5e9c;
+        &:hover {
+        background-color: #a890f0;
+        }
+    }
+    &.Ghost {
+        border: 1px solid #493963;
+        &:hover {
+        background-color: #705898;
+        }
+    }
+    &.Rock {
+        border: 1px solid #786824;
+        &:hover {
+        background-color: #b8a038;
+        }
+    }
+    &.Fighting {
+        border: 1px solid #7d1f1a;
+        &:hover {
+        background-color: #c03028;
+        }
+    }
+    &.Poison {
+        border: 1px solid #682a68;
+        &:hover {
+        background-color: #a040a0;
+        }
+    }
+    &.Psychic {
+        border: 1px solid #a13959;
+        &:hover {
+        background-color: #f85888;
+        }
+    }
+    &.Bug {
+        border: 1px solid #6d7815;
+        &:hover {
+        background-color: #a8b820;
+        }
+    }
+    &.Dark {
+        border: 1px solid #49392f;
+        &:hover {
+        background-color: #705848;
+        }
+    }
+    &.Steel {
+        border: 1px solid #787887;
+        &:hover {
+        background-color: #b8b8d0;
+        }
+    }
+    &.Dragon {
+        border: 1px solid #4924a1;
+        &:hover {
+        background-color: #7038f8;
+        }
+    }
+    &.Fairy {
+        border: 1px solid #fa58f4;
+        &:hover {
+        background-color: #f781d8;
         }
     }
 
