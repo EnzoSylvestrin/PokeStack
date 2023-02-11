@@ -31,7 +31,7 @@ function Home() {
     const [loading, setLoading] = useState<boolean>();
 
     const DoSearch = async (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter' && e.currentTarget.value.trim() != "") {
             try {
                 let Pokemon = await api.getPokemonByName(e.currentTarget.value);
                 let Favorites = await getFavorites();
